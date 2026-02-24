@@ -8,14 +8,6 @@
 ## 🚀 快速开始
 > 👉 配套实操示例：[SimpleDAO 快速开始示例](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
 
-### 1. 添加依赖
-```xml
-<dependency>
-    <groupId>com.simpledao</groupId>
-    <artifactId>simple-dao-core</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
 ## 📋 内容导航
 - [核心理念](#✨-核心理念：大道至简)
 - [痛点解决](#🎯-我们不一样：为什么抛弃传统ORM？)
