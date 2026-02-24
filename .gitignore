@@ -1,0 +1,10 @@
+/target/
+/logs/
+/.settings/
+.classpath
+.project
+/.idea/
+/src/main/resources/static/
+
+
+/backManager.iml
