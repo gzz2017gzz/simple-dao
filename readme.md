@@ -6,7 +6,7 @@
 [![Performance](https://img.shields.io/badge/performance-+60%25-brightgreen)]()
 
 ## 🚀 快速开始
-> 👉 配套实操示例：[SimpleDAO 快速开始示例](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
+> 👉 立即实操：[SimpleDAO 快速开始（跑通完整案例）](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
 
 ## 📋 内容导航
 - [核心理念](#✨-核心理念：大道至简)
