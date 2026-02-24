@@ -1,21 +1,21 @@
-package com.hq.common.base.utils;
+package com.simple.common.base.utils;
 
-import static com.hq.common.base.key.Const.BYTE_0;
-import static com.hq.common.base.key.Const.LONG_0;
-import static com.hq.common.base.key.Const.Sql.COLON;
-import static com.hq.common.base.key.Const.Sql.COMMA;
-import static com.hq.common.base.key.Const.Sql.CREATE_BY;
-import static com.hq.common.base.key.Const.Sql.CREATE_TIME;
-import static com.hq.common.base.key.Const.Sql.DR;
-import static com.hq.common.base.key.Const.Sql.EQQ;
-import static com.hq.common.base.key.Const.Sql.LEFT_BRACKET;
-import static com.hq.common.base.key.Const.Sql.NO_UPDATE;
-import static com.hq.common.base.key.Const.Sql.R_BRACKET;
-import static com.hq.common.base.key.Const.Sql.T;
-import static com.hq.common.base.key.Const.Sql.UPDATE_BY;
-import static com.hq.common.base.key.Const.Sql.UPDATE_TIME;
-import static com.hq.common.base.key.Const.Sql.VALUES;
-import static com.hq.common.base.key.Const.Sql.WHERE;
+import static com.simple.common.base.key.Const.BYTE_0;
+import static com.simple.common.base.key.Const.LONG_0;
+import static com.simple.common.base.key.Const.Sql.COLON;
+import static com.simple.common.base.key.Const.Sql.COMMA;
+import static com.simple.common.base.key.Const.Sql.CREATE_BY;
+import static com.simple.common.base.key.Const.Sql.CREATE_TIME;
+import static com.simple.common.base.key.Const.Sql.DR;
+import static com.simple.common.base.key.Const.Sql.EQQ;
+import static com.simple.common.base.key.Const.Sql.LEFT_BRACKET;
+import static com.simple.common.base.key.Const.Sql.NO_UPDATE;
+import static com.simple.common.base.key.Const.Sql.R_BRACKET;
+import static com.simple.common.base.key.Const.Sql.T;
+import static com.simple.common.base.key.Const.Sql.UPDATE_BY;
+import static com.simple.common.base.key.Const.Sql.UPDATE_TIME;
+import static com.simple.common.base.key.Const.Sql.VALUES;
+import static com.simple.common.base.key.Const.Sql.WHERE;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -26,8 +26,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.hq.common.base.BaseCondition;
-import com.hq.common.base.annotation.Id;
+import com.simple.common.base.BaseCondition;
+import com.simple.common.base.annotation.Id;
 
 import lombok.SneakyThrows;
 

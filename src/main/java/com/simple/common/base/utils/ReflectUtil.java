@@ -1,17 +1,18 @@
-package com.hq.common.base.utils;
+package com.simple.common.base.utils;
 
-import com.hq.common.base.annotation.Exclude;
-import com.hq.common.base.annotation.Id;
-import com.hq.common.base.annotation.Table;
 import lombok.SneakyThrows;
+
+import static com.simple.common.base.key.Const.INT_0;
+import static com.simple.common.base.key.Const.Sql.DR;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static com.hq.common.base.key.Const.INT_0;
-import static com.hq.common.base.key.Const.Sql.DR;
+import com.simple.common.base.annotation.Exclude;
+import com.simple.common.base.annotation.Id;
+import com.simple.common.base.annotation.Table;
 
 /**
  * @author 高振中

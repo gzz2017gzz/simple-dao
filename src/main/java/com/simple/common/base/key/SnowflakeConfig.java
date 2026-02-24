@@ -1,4 +1,4 @@
-package com.hq.common.base.key;
+package com.simple.common.base.key;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,10 +1,10 @@
-package com.hq.common.base.utils;
+package com.simple.common.base.utils;
+
+import static com.simple.common.base.key.Const.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import static com.hq.common.base.key.Const.*;
 
 /**
  * @author 高振中

@@ -1,4 +1,4 @@
-package com.hq.common.base.key;
+package com.simple.common.base.key;
 
 
 /**

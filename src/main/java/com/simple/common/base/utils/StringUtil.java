@@ -1,13 +1,13 @@
-package com.hq.common.base.utils;
+package com.simple.common.base.utils;
 
-import com.hq.common.base.key.Const;
+import static com.simple.common.base.key.Const.INT_0;
+import static com.simple.common.base.key.Const.INT_1;
 
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.hq.common.base.key.Const.INT_0;
-import static com.hq.common.base.key.Const.INT_1;
+import com.simple.common.base.key.Const;
 
 /**
  * @author 高振中

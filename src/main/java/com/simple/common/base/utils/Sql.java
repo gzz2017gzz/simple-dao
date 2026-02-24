@@ -1,7 +1,28 @@
-package com.hq.common.base.utils;
+package com.simple.common.base.utils;
 
-import com.hq.common.base.BaseCondition;
 import lombok.SneakyThrows;
+
+import static com.simple.common.base.key.Const.BLANK;
+import static com.simple.common.base.key.Const.Sql.ALIAS;
+import static com.simple.common.base.key.Const.Sql.COMMA;
+import static com.simple.common.base.key.Const.Sql.COUNT1;
+import static com.simple.common.base.key.Const.Sql.DELETE;
+import static com.simple.common.base.key.Const.Sql.EQQ;
+import static com.simple.common.base.key.Const.Sql.FROM;
+import static com.simple.common.base.key.Const.Sql.IN;
+import static com.simple.common.base.key.Const.Sql.INSERT;
+import static com.simple.common.base.key.Const.Sql.INTO;
+import static com.simple.common.base.key.Const.Sql.NULL;
+import static com.simple.common.base.key.Const.Sql.QUOT;
+import static com.simple.common.base.key.Const.Sql.REPLACE;
+import static com.simple.common.base.key.Const.Sql.SELECT;
+import static com.simple.common.base.key.Const.Sql.SEMICOLON_WRAP;
+import static com.simple.common.base.key.Const.Sql.T;
+import static com.simple.common.base.key.Const.Sql.T_SET;
+import static com.simple.common.base.key.Const.Sql.UPDATE;
+import static com.simple.common.base.key.Const.Sql.WHERE;
+import static com.simple.common.base.key.Const.Sql.WHERE_T;
+import static com.simple.common.base.key.Const.Sql.WRAP;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -12,27 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.hq.common.base.key.Const.BLANK;
-import static com.hq.common.base.key.Const.Sql.ALIAS;
-import static com.hq.common.base.key.Const.Sql.COMMA;
-import static com.hq.common.base.key.Const.Sql.COUNT1;
-import static com.hq.common.base.key.Const.Sql.DELETE;
-import static com.hq.common.base.key.Const.Sql.EQQ;
-import static com.hq.common.base.key.Const.Sql.FROM;
-import static com.hq.common.base.key.Const.Sql.IN;
-import static com.hq.common.base.key.Const.Sql.INSERT;
-import static com.hq.common.base.key.Const.Sql.INTO;
-import static com.hq.common.base.key.Const.Sql.NULL;
-import static com.hq.common.base.key.Const.Sql.QUOT;
-import static com.hq.common.base.key.Const.Sql.REPLACE;
-import static com.hq.common.base.key.Const.Sql.SELECT;
-import static com.hq.common.base.key.Const.Sql.SEMICOLON_WRAP;
-import static com.hq.common.base.key.Const.Sql.T;
-import static com.hq.common.base.key.Const.Sql.T_SET;
-import static com.hq.common.base.key.Const.Sql.UPDATE;
-import static com.hq.common.base.key.Const.Sql.WHERE;
-import static com.hq.common.base.key.Const.Sql.WHERE_T;
-import static com.hq.common.base.key.Const.Sql.WRAP;
+import com.simple.common.base.BaseCondition;
 
 /**
  * @author 高振中

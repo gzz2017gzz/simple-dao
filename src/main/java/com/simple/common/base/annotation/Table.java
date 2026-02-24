@@ -1,4 +1,4 @@
-package com.hq.common.base.annotation;
+package com.simple.common.base.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

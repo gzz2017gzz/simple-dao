@@ -1,7 +1,7 @@
-package com.hq.common.base;
+package com.simple.common.base;
 
-import static com.hq.common.base.key.Const.INT_1;
-import static com.hq.common.base.utils.Sql.wash;
+import static com.simple.common.base.key.Const.INT_1;
+import static com.simple.common.base.utils.Sql.wash;
 import static org.springframework.util.Assert.isTrue;
 
 import java.lang.reflect.Field;
@@ -20,8 +20,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.hq.common.base.utils.ReflectUtil;
-import com.hq.common.base.utils.Sql;
+import com.simple.common.base.utils.ReflectUtil;
+import com.simple.common.base.utils.Sql;
 
 import lombok.extern.slf4j.Slf4j;
 

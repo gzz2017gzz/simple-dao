@@ -1,6 +1,5 @@
-package com.hq.common.base;
+package com.simple.common.base;
 
-import com.hq.common.base.utils.Sql;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,17 +7,19 @@ import lombok.experimental.Accessors;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.StringUtils;
 
+import com.simple.common.base.utils.Sql;
+
+import static com.simple.common.base.key.Const.BLANK;
+import static com.simple.common.base.key.Const.EMPTY;
+import static com.simple.common.base.key.Const.INT_0;
+import static com.simple.common.base.key.Const.INT_1;
+import static com.simple.common.base.key.Const.INT_10;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import static com.hq.common.base.key.Const.BLANK;
-import static com.hq.common.base.key.Const.EMPTY;
-import static com.hq.common.base.key.Const.INT_0;
-import static com.hq.common.base.key.Const.INT_1;
-import static com.hq.common.base.key.Const.INT_10;
 
 /**
  * @author 高振中
