@@ -293,62 +293,8 @@ public class LogAspect {
 | 单表分页查询 | 45 ms | 80 ms (+78%) | 120 ms (+167%) | ⚡ **快 78-167%** |
 | 5 表联表分页 | 110 ms | 180 ms (+64%) | 250 ms (+127%) | 🔥 **快 64-127%** |
 | 复杂报表查询 | 200 ms | 350 ms (+75%) | 500 ms (+150%) | 💎 **快 75-150%** |
-*测试环境：MySQL 8.0，100 万数据量，Spring Boot 应用，JDK 17*
-
-## 🚀 快速开始
-### 1. 添加依赖
-```xml
-<dependency>
-    <groupId>com.simpledao</groupId>
-    <artifactId>simple-dao-core</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-### 2. 创建实体
-```java
-@Table("sys_user")
-public class User {
-    @Id("snow") // 雪花主键
-    private Long id;
-    private String name;
-    private Integer age;
-    // 自动映射驼峰与下划线
-    private Date createTime;
-    // Lombok 或其他 getter/setter
-}
-```
-
-### 3. 创建 Dao（就这么简单）
-```java
-@Repository
-public class UserDao extends BaseDao<User> {
-    // 单表操作已全部拥有
-    // 需要联表？直接写 SQL 方法
-}
-```
-
-### 4. 使用示例
-```java
-@Autowired
-private UserDao userDao;
-
-// 分页查询
-UserCond cond = UserCond.builder()
-    .name("张")
-    .ageMin(18)
-    .build();
-Page<User> page = userDao.page(cond);
-
-// 联表查询
-public Page<UserVO> pageWithDept(UserCond cond) {
-    String sql = """
-        SELECT u.*, d.name as dept_name 
-        FROM user u LEFT JOIN dept d ON u.dept_id = d.id
-        """;
-    return userDao.page(sql, cond, UserVO.class);
-}
-```
+*测试环境：MySQL 8.0，100 万数据量，Spring Boot 应用，JDK 21
+ 
 
 ## 🏆 核心价值总结
 SimpleDAO 通过 **25 个精准的痛点解决方案**，实现了五个维度的降维打击：
