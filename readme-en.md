@@ -365,7 +365,13 @@ We welcome you to:
 - 💬 **Join** our discussion groups
 
 ## 📄 License
-MIT License - You are free to use, modify, and distribute SimpleDAO.
+SimpleDAO is open source under the Apache License 2.0.
+
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
+
+Under the terms of this license, you are entitled to freely use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and permit persons to whom the Software is furnished to do so, subject to the following condition: the copyright notices and license notices specified in the License must be included in all copies or substantial portions of the Software.
 
 ## 🎯 Final Words
 SimpleDAO is not meant to be just another popular framework, but to prove one thing:
