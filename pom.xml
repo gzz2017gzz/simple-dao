@@ -58,4 +58,47 @@
             </plugin>
         </plugins>
     </build>
+
+
+
+
+    <!-- 基础元信息（审核必填） -->
+    <name>SimpleDAO</name>
+    <description>A persistence layer framework based on the SQL-First paradigm</description>
+    <url>https://gitee.com/gao_zhenzhong/simple-dao</url>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://gitee.com/gao_zhenzhong/simple-dao/blob/master/LICENSE.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>高振中</name>
+            <email>gzz_gzz@163.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://gitee.com/gao_zhenzhong/simple-dao</url>
+        <connection>scm:git:https://gitee.com/gao_zhenzhong/simple-dao.git</connection>
+    </scm>
+
+    <!-- 发布仓库配置 -->
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+
+
+
+
+
+
+
+
+
+
+
  </project>
