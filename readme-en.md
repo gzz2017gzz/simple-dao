@@ -1,6 +1,6 @@
 # SimpleDAO - Revolutionizing Enterprise-Grade Data Access
 > **SQL-First · Concise & Efficient · Non-ORM Framework**
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Java](https://img.shields.io/badge/java-21%2B-orange)](https://www.oracle.com/java/)
 [![Production Ready](https://img.shields.io/badge/production-ready-green)](https://github.com/simpledao/simpledao)
 [![Performance](https://img.shields.io/badge/performance-+60%25-brightgreen)]()
