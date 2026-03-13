@@ -6,7 +6,7 @@
 [![Performance](https://img.shields.io/badge/performance-+60%25-brightgreen)]()
 
 ## 🚀 Quick Start
-> 👉 Hands-On Now: [SimpleDAO Quick Start (Run the Complete Demo)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
+> 👉 Hands-On Now: [SimpleDAO Quick Start (Run the Complete Demo)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme-en.md)
 
 ## 📋 Content Navigation
 - [Core Philosophy](#✨-core-philosophy:-simplicity-is-the-ultimate-sophistication)
