@@ -393,11 +393,8 @@ We exist for those who:
 
 ## 📚 In-Depth Reading
 To learn about SimpleDAO's underlying design logic, comprehensive comparison with ORM frameworks, in-depth refutation of common doubts, and the design philosophy of "doing no harm is already a great good", check out:  
-[📄 SimpleDAO White Paper: Outperforming ORM Frameworks in All Scenarios](docs/技术白皮书.md)  
-[📄 SQL-First Manifesto](docs/SQL-First宣言.md)  
-[📄 SQL-First Paradigm Migration Guide](docs/SQL-First范式移植指南.md)  
-[📄 Full-Scenario Comparison Matrix](docs/全场景对比矩阵.md)  
-[📄 SimpleDAO Quick Start (Run the Complete Demo)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
+  
+[📄 SimpleDAO Quick Start (Run the Complete Demo)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme-en.md)
 
 ### Translation Notes
 1. **Term Consistency**: Key terms are translated consistently (e.g., "软删除" → "Soft Delete", "雪花主键" → "Snowflake primary key", "分页" → "Pagination").
