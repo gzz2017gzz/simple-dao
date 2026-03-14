@@ -110,9 +110,9 @@ List<UserVO> list = dao.list(sql, cond, UserVO.class);
 **范式标准完。**
 
 > **相关文档**  
-> - 想了解 SQL-First 的思想原点？请移步 **[01 SQL-First宣言](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/01_SQL-First%E5%AE%A3%E8%A8%80.md)**  
-> - 想了解 SQL-First 与 ORM 的全方位对比？请移步 **[02 全场景对比矩阵](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/02_%E5%85%A8%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E7%9F%A9%E9%98%B5.md)**  
-> - 想看到 Java 版的实际落地案例？请移步 **[04 SimpleDAO技术白皮书](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/04_SimpleDAO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.md)**  
-> - 想在你的语言中实现 SQL-First？请移步 **[05 SQL-First范式移植指南](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/05_SQL-First%E8%8C%83%E5%BC%8F%E7%A7%BB%E6%A4%8D%E6%8C%87%E5%8D%97.md)**
+> - 想了解 SQL-First 的思想原点？请移步 **[01 SQL-First宣言](01_SQL-First%E5%AE%A3%E8%A8%80.md)**  
+> - 想了解 SQL-First 与 ORM 的全方位对比？请移步 **[02 全场景对比矩阵](02_%E5%85%A8%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E7%9F%A9%E9%98%B5.md)**  
+> - 想看到 Java 版的实际落地案例？请移步 **[04 SimpleDAO技术白皮书](04_SimpleDAO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.md)**  
+> - 想在你的语言中实现 SQL-First？请移步 **[05 SQL-First范式移植指南](05_SQL-First%E8%8C%83%E5%BC%8F%E7%A7%BB%E6%A4%8D%E6%8C%87%E5%8D%97.md)**
 
 ---

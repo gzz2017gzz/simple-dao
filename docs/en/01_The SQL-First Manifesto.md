@@ -332,7 +332,6 @@ But we've also reinvented "the wheel must be round" for five thousand years.
 **End of Manifesto.**
 
 > **Next Reads**  
-> - To understand the origin of SQL-First thinking, see **[01 The SQL-First Manifesto](01_The%20SQL-First%20Manifesto.md)**  
 > - For a comprehensive comparison between SQL-First and ORM, see **[02 Full-Scenario Comparison Matrix](02_Full-Scenario%20Comparison%20Matrix.md)**  
 > - For the concrete implementation standard of the SQL-First paradigm, see **[03 SQL-First Persistence Development Paradigm Standard](03_SQL-First%20Persistence%20Development%20Paradigm%20Standard.md)**  
 > - For Java implementation details and real-world cases, see **[04 SimpleDAO Technical Whitepaper](04_SimpleDAO%20Technical%20Whitepaper.md)**  
