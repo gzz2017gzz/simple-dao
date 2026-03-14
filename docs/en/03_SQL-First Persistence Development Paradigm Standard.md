@@ -110,7 +110,8 @@ List<UserVO> list = dao.list(sql, cond, UserVO.class);
 **End of Paradigm Standard.**
 
 > **Related Documents**  
-> - To understand the origin of SQL-First thinking, see **[01 The SQL-First Manifesto](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/01_SQL-First%E5%AE%A3%E8%A8%80.md)**  
-> - For a comprehensive comparison between SQL-First and ORM, see **[02 Full-Scenario Comparison Matrix](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/02_%E5%85%A8%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E7%9F%A9%E9%98%B5.md)**  
-> - For Java implementation details and real-world cases, see **[04 SimpleDAO Technical Whitepaper](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/04_SimpleDAO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.md)**  
-> - To implement SQL-First in your language, see **[05 SQL-First Paradigm Porting Guide](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/05_SQL-First%E8%8C%83%E5%BC%8F%E7%A7%BB%E6%A4%8D%E6%8C%87%E5%8D%97.md)**
+> - To understand the origin of SQL-First thinking, see **[01 The SQL-First Manifesto](01_The%20SQL-First%20Manifesto.md)**  
+> - For a comprehensive comparison between SQL-First and ORM, see **[02 Full-Scenario Comparison Matrix](02_Full-Scenario%20Comparison%20Matrix.md)**  
+> - For the concrete implementation standard of the SQL-First paradigm, see **[03 SQL-First Persistence Development Paradigm Standard](03_SQL-First%20Persistence%20Development%20Paradigm%20Standard.md)**  
+> - For Java implementation details and real-world cases, see **[04 SimpleDAO Technical Whitepaper](04_SimpleDAO%20Technical%20Whitepaper.md)**  
+> - To implement SQL-First in your language, see **[05 SQL-First Paradigm Porting Guide](05_SQL-First%20Paradigm%20Porting%20Guide.md)**
