@@ -166,10 +166,10 @@ Java 源码（略）
 **移植指南完。**
 
 > **相关文档**  
-> - 想了解 SQL-First 的思想原点？请移步 **[01 SQL-First宣言](#)**  
-> - 想看到 SQL-First 与 ORM 的全面对比？请移步 **[02 全场景对比矩阵](#)**  
-> - 想了解 SQL-First 范式的具体实现标准？请移步 **[03 SQL-First 持久层开发范式标准](#)**  
-> - 想看到 Java 版的实际落地案例？请移步 **[04 SimpleDAO技术白皮书](#)**
+> - 想了解 SQL-First 的思想原点？请移步 **[01 SQL-First宣言](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/01_SQL-First%E5%AE%A3%E8%A8%80.md)**  
+> - 想了解 SQL-First 与 ORM 的全方位对比？请移步 **[02 全场景对比矩阵](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/02_%E5%85%A8%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E7%9F%A9%E9%98%B5.md)**  
+> - 想了解 SQL-First 范式的具体实现标准？请移步 **[03 SQL-First 持久层开发范式标准](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/03_SQL-First%20%E6%8C%81%E4%B9%85%E5%B1%82%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E6%A0%87%E5%87%86.md)**  
+> - 想看到 Java 版的实际落地案例？请移步 **[04 SimpleDAO技术白皮书](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/04_SimpleDAO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.md)**  
 
 ---
 
@@ -177,5 +177,3 @@ Java 源码（略）
 *最好的致敬，是在你的语言里写一个自己的 SimpleDAO。然后告诉下一个人：你也可以。*
 
 ---
-
-以上为融入新理念后的五份文档。如需进一步调整，请随时提出。
