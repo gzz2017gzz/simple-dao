@@ -396,11 +396,6 @@ To learn about SimpleDAO's underlying design logic, comprehensive comparison wit
   
 [📄 SimpleDAO Quick Start (Run the Complete Demo)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme-en.md)
 
-> - To understand the origin of SQL-First thinking, see **[01 The SQL-First Manifesto](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/en/01_The%20SQL-First%20Manifesto.md)**  
-> - For a comprehensive comparison between SQL-First and ORM, see **[02 Full-Scenario Comparison Matrix](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/en/02_Full-Scenario%20Comparison%20Matrix.md)**  
-> - For the concrete implementation standard of the SQL-First paradigm, see **[03 SQL-First Persistence Development Paradigm Standard](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/en/03_SQL-First%20Persistence%20Development%20Paradigm%20Standard.md)**  
-> - For Java implementation details and real-world cases, see **[04 SimpleDAO Technical Whitepaper](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/en/04_SimpleDAO%20Technical%20Whitepaper.md)**  
-> - To implement SQL-First in your language, see **[05 SQL-First Paradigm Porting Guide](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/en/05_SQL-First%20Paradigm%20Porting%20Guide.md)**
 
 ### Translation Notes
 1. **Term Consistency**: Key terms are translated consistently (e.g., "软删除" → "Soft Delete", "雪花主键" → "Snowflake primary key", "分页" → "Pagination").
