@@ -57,7 +57,7 @@ import static com.simple.common.base.utils.StringUtil.uuid;
  * @date 2024-05-10 21:45:31
  **/
 @Scope("prototype")
-public class BaseDao<T> extends BaseJdbc {
+public class BaseDao<T> extends BaseSql {
     private final Class<T> clazz; // 实体类类型
     private final List<Field> fields;// 实体类对应的字段列表
     private final Map<String, Field> fieldMap;// 实体类对应的字段Map

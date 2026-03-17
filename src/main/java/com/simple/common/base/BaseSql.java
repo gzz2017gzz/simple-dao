@@ -27,11 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 高振中
- * @summary 【JDBC基类】用于自定义SQL语:像联表操作,自定义的INSERT/UPDATE,只能在DAO中使用的方法
+ * @summary 【SQL执行器-->JDBC基类】用于自定义SQL语:像联表操作,自定义的INSERT/UPDATE,只能在DAO中使用的方法
  * @date 2024-05-10 21:45:31
  **/
 @Slf4j
-public abstract class BaseJdbc {
+public abstract class BaseSql {
 
     @Autowired
     protected JdbcTemplate jdbc;// 注入jdbc模板(占位符)
