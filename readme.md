@@ -1,6 +1,4 @@
 
----
-
 # SimpleDAO - 企业级数据访问的革命
 
 > **SQL-First · 白盒透明 · 非ORM框架**  
