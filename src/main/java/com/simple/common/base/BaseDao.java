@@ -6,6 +6,8 @@ import com.simple.common.base.utils.ReflectUtil;
 import com.simple.common.base.utils.Sql;
 
 import lombok.SneakyThrows;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.GenericTypeResolver;
 
@@ -66,7 +68,8 @@ public class BaseDao<T> extends BaseSql {
     private final String idType;// 表主键类型
     private final Boolean hasDr;// 是否包括删除标记
     protected Boolean checkRef = false;// [检查表的引用关系]的开关
-
+    @Value("${simple-dao.show-sql:true}")   
+    private boolean showSql;
     /**
      * @方法说明 系统启动时通过反射去解析表结构
      */
@@ -128,7 +131,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 保存记录
      */
     public T save(final T t) {
-        return save(true, t);
+        return save(showSql, t);
     }
 
     public T save(boolean show, final T t) {
@@ -239,7 +242,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 获取一行记录，若有多行数据则抛出异常
      */
     public <C extends BaseCondition> T findOne(final C c) {
-        return findOne(true, c);
+        return findOne(showSql, c);
     }
 
     public <C extends BaseCondition> T findOne(boolean show, final C c) {
@@ -255,7 +258,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 按条件查询列表
      */
     public <C extends BaseCondition> List<T> list(final C c) {
-        return list(true, c);
+        return list(showSql, c);
     }
 
     public <C extends BaseCondition> List<T> list(boolean show, final C c) {
@@ -268,7 +271,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 批量替换记录
      */
     public List<T> replaceBatch(final List<T> list) {
-        return saveBatch(true, list, REPLACE_INTO);
+        return saveBatch(showSql, list, REPLACE_INTO);
     }
 
     public List<T> replaceBatch(boolean show, final List<T> list) {
@@ -280,7 +283,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 批量保存记录
      */
     public List<T> saveBatch(final List<T> list) {
-        return saveBatch(true, list, INSERT_INTO);
+        return saveBatch(showSql, list, INSERT_INTO);
     }
 
     public List<T> saveBatch(boolean show, final List<T> list) {
@@ -342,7 +345,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 按主键数组删除记录
      */
     public int delete(final Object... ids) {
-        return delete(true, ids);
+        return delete(showSql, ids);
     }
 
     public int delete(boolean show, final Object... ids) {
@@ -360,7 +363,7 @@ public class BaseDao<T> extends BaseSql {
      * @方法说明 按条件删除记录
      */
     public <C extends BaseCondition> int delete(final C c) {
-        return delete(true, c);
+        return delete(showSql, c);
     }
 
     public <C extends BaseCondition> int delete(boolean show, final C c) {

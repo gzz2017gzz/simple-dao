@@ -87,7 +87,7 @@ SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原
 
 **结论：SimpleDAO 的能力上限 = Spring 生态的上限，没有任何人为设置的边界。**
 
-### 3. 性能对齐 Spring JDBC（不接受反驳）
+### 3. 性能对齐 Spring JDBC
 
 - **启动时反射，运行时零反射**：所有元数据在启动时解析一次并缓存（双引用缓存设计），运行时无任何反射开销。
 - **单表才读元数据，联表完全不读**：联表查询直接用你提供的 SQL，框架不解析任何实体或注解。
@@ -100,14 +100,14 @@ SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原
 
 ## 🎯 我们不一样：为什么抛弃传统 ORM？
 
-| 痛点 | MyBatis | JPA/Hibernate | SimpleDAO |
+| 痛点 | MyBatis生态 | JPA/Hibernate | SimpleDAO |
 |------|---------|---------------|-----------|
 | **XML 配置地狱** | ❌ 每个表都要写 Mapper.xml + resultMap | ❌ 复杂的注解或 XML 映射 | ✅ 实体类一个注解搞定 |
 | **动态 SQL** | ❌ `<if>`、`<foreach>`、`<choose>` 标签地狱 | ❌ Criteria API 冗长或字符串拼接 | ✅ `addCondition()` 中一行一个条件 |
 | **单表/联表割裂** | ❌ 单表用 MP，联表退回 XML | ❌ JPQL 简单场景能用，复杂场景崩 | ✅ 单表/联表同一套 API |
 | **SQL 调试** | ❌ 日志输出带 `?` 的 SQL，手动替换参数 | ❌ 可能输出 HQL 或混乱的 SQL | ✅ 输出完整带参 SQL，复制即用 |
 | **扩展能力** | ❌ Interceptor 插件，门槛极高 | ❌ 事件监听器，复杂且受限 | ✅ Spring AOP 白盒扩展，零门槛 |
-| **学习成本** | ❌ MyBatis + XML + OGNL + 插件机制 | ❌ JPA 规范 + HQL + 生命周期 | ✅ 只会 SQL + Spring JDBC 即可 |
+| **学习成本** | ❌ MyBatis + XML + OGNL + 插件机制 | ❌ JPA 规范 + HQL + 生命周期 | ✅ 只会 SQL + Java 即可 |
 | **自造错误** | ❌ 31 类框架自造错误 | ❌ 大量 ORM 特有的异常 | ✅ 只有数据库原始错误 |
 | **能力上限** | ❌ 框架限制，部分 SQL 写不出来 | ❌ JPQL 能力远弱于 SQL | ✅ **上限 = SQL 的上限** |
 
@@ -226,7 +226,7 @@ private Long id;  // 雪花算法，支持反向解析时间戳
 
 ---
 
-## 📊 性能数据：≈ Spring JDBC（不接受反驳）
+## 📊 性能数据：≈ Spring JDBC
 
 | 操作类型 | SimpleDAO | Spring JDBC | MyBatis | JPA |
 |---------|-----------|-------------|---------|-----|
@@ -293,7 +293,7 @@ public class DataAuthAspect {
 |------|----------|-----------|
 | **代码量** | 基准 | 减少 **60-80%** |
 | **开发时间** | 基准 | 缩短 **50%** |
-| **学习成本** | 2-5 天 | **2 小时** |
+| **学习成本** | 2-5 天 | **20 分钟** |
 | **调试体验** | 占位符 SQL，手动替换参数 | **完整 SQL，复制即用** |
 | **能力上限** | 框架限制 | **SQL 的上限 = Spring 的上限** |
 | **扩展门槛** | 高（需啃源码） | **零（Spring AOP）** |
@@ -303,6 +303,15 @@ public class DataAuthAspect {
 ---
 
 ## 🤔 常见问题
+**Q: 要求 Java 21+，老项目用不了？**  
+**A: 故意写的。核心只是字符串拼接，降级到 JDK 8 分分钟——让 AI 帮你改，几分钟的事。**  
+（源码里那几处新语法，换个写法就行。你不会连 AI 都懒得用吧？）
+
+**Q: 从 MyBatis 迁移到 SimpleDAO 成本高吗？**  
+**A: 零迁移成本。SimpleDAO 可与 MyBatis 无缝共生，你不需要改动任何老代码。**  
+- 引入 SimpleDAO 依赖后，原有 MyBatis 的 Mapper、XML、插件照常运行。  
+- 新业务直接用 SimpleDAO 开发，老代码碰都不碰。  
+- 没有“迁移”这个概念，只有“增量使用”。有精力就换，没精力永远共存。
 
 **Q: SimpleDAO 和 MyBatis Plus 有什么区别？**  
 A: MP 是“半 ORM”——单表用对象操作，多表退回 XML。SimpleDAO 是“SQL-First”——单表/多表都用 SQL 思维，API 完全统一。
@@ -312,9 +321,6 @@ A: 不需要。你会 SQL 和 Java，就会用 SimpleDAO。没有 XML、OGNL、J
 
 **Q: 适合微服务架构吗？**  
 A: 特别适合。轻量级（核心仅 3 个类）、无外部依赖、与 Spring Cloud 生态完美融合。
-
-**Q: 从 MyBatis 迁移成本高吗？**  
-A: 极低。保持 SQL 不变，只需将 Mapper 改为 Dao，XML 中的 SQL 移到 Java 中。新老共存，逐步替换。
 
 **Q: 性能真的和 Spring JDBC 一样吗？**  
 A: 是的。启动时反射一次并缓存，运行时零反射；联表查询完全不解析实体；最终执行层就是 `JdbcTemplate`。**不接受反驳。**
@@ -327,11 +333,7 @@ A: 已复刻到 Python、PHP、Go、C++、Node.js、Rust、C# 等 8 种主流后
 ## 📚 深度阅读
 
 - [📄 SimpleDAO 快速开始（跑通完整案例）](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
-- [📄 01 SQL-First 宣言](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/01_SQL-First%E5%AE%A3%E8%A8%80.md)
-- [📄 02 全场景对比矩阵](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/02_%E5%85%A8%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E7%9F%A9%E9%98%B5.md)
-- [📄 03 SQL-First 持久层开发范式标准](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/03_SQL-First%20%E6%8C%81%E4%B9%85%E5%B1%82%E5%BC%80%E5%8F%91%E8%8C%83%E5%BC%8F%E6%A0%87%E5%87%86.md)
-- [📄 04 SimpleDAO 技术白皮书](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/04_SimpleDAO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.md)
-- [📄 05 SQL-First 范式移植指南](https://gitee.com/gao_zhenzhong/simple-dao/blob/master/docs/cn/05_SQL-First%E8%8C%83%E5%BC%8F%E7%A7%BB%E6%A4%8D%E6%8C%87%E5%8D%97.md)
+
 
 ---
 

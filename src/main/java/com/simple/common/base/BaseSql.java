@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
@@ -32,7 +33,10 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public abstract class BaseSql {
-
+	
+    @Value("${simple-dao.show-sql:true}")   
+    private boolean showSql;
+    
     @Autowired
     protected JdbcTemplate jdbc;// 注入jdbc模板(占位符)
     @Autowired
@@ -46,7 +50,7 @@ public abstract class BaseSql {
      * @方法说明 分页查询
      */
     protected <T, C extends BaseCondition> Page<T> page(String sql, final C cond, final Class<T> clazz) {
-        return page(true, sql, cond, clazz);
+        return page(showSql, sql, cond, clazz);
     }
 
     protected <T, C extends BaseCondition> Page<T> page(boolean logSql, String sql, final C cond, final Class<T> clazz) {
@@ -64,7 +68,7 @@ public abstract class BaseSql {
      * @方法说明 嵌套分页查询(兼容性好效率低)
      */
     protected <T, C extends BaseCondition> Page<T> page0(String sql, final C cond, final Class<T> clazz) {
-        return page0(true, sql, cond, clazz);
+        return page0(showSql, sql, cond, clazz);
     }
 
     protected <T, C extends BaseCondition> Page<T> page0(boolean logSql, String sql, final C cond, final Class<T> clazz) {
@@ -81,7 +85,7 @@ public abstract class BaseSql {
      * @方法说明 批操作 命名参数方式
      */
     protected <T> int[] batchOperate(final List<T> list, final String sql) {
-        return batchOperate(true, list, sql);
+        return batchOperate(showSql, list, sql);
     }
 
     protected <T> int[] batchOperate(boolean logSql, final List<T> list, final String sql) {
@@ -99,7 +103,7 @@ public abstract class BaseSql {
      * @方法说明 查询记录个数
      */
     protected <C extends BaseCondition> Integer count(final String sql, final C cond) {
-        return field(true, sql, Integer.class, cond);
+        return field(showSql, sql, Integer.class, cond);
     }
 
     protected <C extends BaseCondition> Integer count(boolean logSql, final String sql, final C cond) {
@@ -112,7 +116,7 @@ public abstract class BaseSql {
      * @方法说明 查询记录个数
      */
     protected Integer count(final String sql, final Object... obj) {
-        return field(true, sql, Integer.class, obj);
+        return field(showSql, sql, Integer.class, obj);
     }
 
     protected Integer count(boolean logSql, final String sql, final Object... obj) {
@@ -125,7 +129,7 @@ public abstract class BaseSql {
      * @方法说明 执行INSERT/UPDATE/DELETE操作
      */
     protected Integer update(String sql, final Object... obj) {
-        return update(true, sql, obj);
+        return update(showSql, sql, obj);
     }
 
     private static final Pattern DELETE_PATTERN = Pattern.compile("DELETE", Pattern.CASE_INSENSITIVE);
@@ -150,7 +154,7 @@ public abstract class BaseSql {
      * @方法说明 执行INSERT操作 命名参数方式
      */
     protected <T> int save(final T t, final String sql) {
-        return save(true, t, sql);
+        return save(showSql, t, sql);
     }
 
     protected <T> int save(boolean logSql, final T t, final String sql) {
@@ -167,7 +171,7 @@ public abstract class BaseSql {
      * @方法说明 执行INSERT操作返回数据库自增主键 命名参数方式
      */
     protected <T> T saveKey(final T t, final String sql, final String idName) {
-        return saveKey(true, t, sql, idName);
+        return saveKey(showSql, t, sql, idName);
     }
 
     protected <T> T saveKey(boolean logSql, final T t, final String sql, final String idName) {
@@ -188,7 +192,7 @@ public abstract class BaseSql {
      * @方法说明 查询数据列表
      */
     protected <T, C extends BaseCondition> List<T> list(String sql, final C cond, final Class<T> clazz) {
-        return list(true, sql, cond, clazz);
+        return list(showSql, sql, cond, clazz);
     }
 
     protected <T, C extends BaseCondition> List<T> list(boolean logSql, String sql, final C cond, final Class<T> clazz) {
@@ -203,7 +207,7 @@ public abstract class BaseSql {
      * @方法说明 查询数据列表
      */
     protected <T> List<T> list(String sql, final Class<T> clazz, final Object... obj) {
-        return list(true, sql, clazz, obj);
+        return list(showSql, sql, clazz, obj);
     }
 
     protected <T> List<T> list(boolean logSql, String sql, final Class<T> clazz, final Object... obj) {
@@ -221,7 +225,7 @@ public abstract class BaseSql {
      * @方法说明 查询单列多行数据
      */
     protected <T, C extends BaseCondition> List<T> columns(String sql, final C cond, final Class<T> clazz) {
-        return columns(true, sql, clazz, cond.array());
+        return columns(showSql, sql, clazz, cond.array());
     }
 
     protected <T, C extends BaseCondition> List<T> columns(boolean logSql, String sql, final C cond, final Class<T> clazz) {
@@ -236,7 +240,7 @@ public abstract class BaseSql {
      * @方法说明 查询单列多行数据
      */
     protected <T> List<T> columns(final String sql, final Class<T> clazz, final Object... obj) {
-        return columns(true, sql, clazz, obj);
+        return columns(showSql, sql, clazz, obj);
     }
 
     protected <T> List<T> columns(boolean logSql, final String sql, final Class<T> clazz, final Object... obj) {
@@ -253,7 +257,7 @@ public abstract class BaseSql {
      * @方法说明 查询[单行多列]记录:如使用聚合函数时,行数不唯一时抛异常
      */
     protected <T, C extends BaseCondition> T row(String sql, final Class<T> clazz, final C cond) {
-        return row(true, sql, clazz, cond);
+        return row(showSql, sql, clazz, cond);
     }
 
     protected <T, C extends BaseCondition> T row(boolean logSql, String sql, final Class<T> clazz, final C cond) {
@@ -268,7 +272,7 @@ public abstract class BaseSql {
      * @方法说明 查询[单行多列]记录:如使用聚合函数时,行数不唯一时抛异常
      */
     protected <T> T row(String sql, final Class<T> clazz, final Object... obj) {
-        return row(true, sql, clazz, obj);
+        return row(showSql, sql, clazz, obj);
     }
 
     protected <T> T row(boolean logSql, String sql, final Class<T> clazz, final Object... obj) {
@@ -285,7 +289,7 @@ public abstract class BaseSql {
      * @方法说明 查询[单行单列]记录:如使用聚合函数时,行数不唯一时抛异常
      */
     protected <T, C extends BaseCondition> T field(String sql, final Class<T> clazz, final C cond) {
-        return field(true, sql, clazz, cond);
+        return field(showSql, sql, clazz, cond);
     }
 
     protected <T, C extends BaseCondition> T field(boolean logSql, String sql, final Class<T> clazz, final C cond) {
@@ -300,7 +304,7 @@ public abstract class BaseSql {
      * @方法说明 查询[单行单列]记录:如使用聚合函数时,行数不唯一时抛异常
      */
     protected <T> T field(String sql, final Class<T> clazz, final Object... obj) {
-        return field(true, sql, clazz, obj);
+        return field(showSql, sql, clazz, obj);
     }
 
     protected <T> T field(boolean logSql, String sql, final Class<T> clazz, final Object... obj) {
