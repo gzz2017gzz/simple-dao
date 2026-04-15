@@ -33,10 +33,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public abstract class BaseSql {
-	
-    @Value("${simple-dao.show-sql:true}")   
+    @Value("${simple-dao.show-sql:true}")  //默认是否显带参SQL 
     private boolean showSql;
-    
     @Autowired
     protected JdbcTemplate jdbc;// 注入jdbc模板(占位符)
     @Autowired

@@ -69,7 +69,7 @@ public class BaseDao<T> extends BaseSql {
     private final Boolean hasDr;// 是否包括删除标记
     protected Boolean checkRef = false;// [检查表的引用关系]的开关
     @Value("${simple-dao.show-sql:true}")   
-    private boolean showSql;
+    private boolean showSql;//默认是否显带参SQL
     /**
      * @方法说明 系统启动时通过反射去解析表结构
      */
