@@ -51,12 +51,10 @@ public interface Const {
         String WRAP = "\r\n";
         String SEMICOLON_WRAP = ";\r\n";
         String COUNT1 = "COUNT(1)";
-        String DR_EQ = "dr=1";
         String CREATE_TIME = "createTime";
         String CREATE_BY = "createBy";
         String UPDATE_TIME = "updateTime";
         String UPDATE_BY = "updateBy";
-        String DR = "dr";
         Set<String> NO_UPDATE = Set.of(CREATE_TIME, CREATE_BY);
     }
 

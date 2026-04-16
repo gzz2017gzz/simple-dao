@@ -1,10 +1,7 @@
 package com.simple.common.base.utils;
 
-import lombok.SneakyThrows;
-
 import static com.simple.common.base.key.Const.INT_0;
-import static com.simple.common.base.key.Const.Sql.DR;
-
+import static  com.simple.common.base.utils.StringUtil.toLowerCamel;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +10,8 @@ import java.util.Map;
 import com.simple.common.base.annotation.Exclude;
 import com.simple.common.base.annotation.Id;
 import com.simple.common.base.annotation.Table;
+
+import lombok.SneakyThrows;
 
 /**
  * @author 高振中
@@ -92,7 +91,7 @@ public final class ReflectUtil {
      * @return 布尔值
      */
 
-    public static boolean hasDr(final List<Field> fields) {
-        return fields.stream().anyMatch(i -> i.getName().contains(DR));
+    public static boolean hasDr(final List<Field> fields,String fieldName) {
+        return fields.stream().anyMatch(i -> i.getName().contains(toLowerCamel(fieldName)));
     }
 }

@@ -6,7 +6,6 @@ import static com.simple.common.base.key.Const.Sql.COLON;
 import static com.simple.common.base.key.Const.Sql.COMMA;
 import static com.simple.common.base.key.Const.Sql.CREATE_BY;
 import static com.simple.common.base.key.Const.Sql.CREATE_TIME;
-import static com.simple.common.base.key.Const.Sql.DR;
 import static com.simple.common.base.key.Const.Sql.EQQ;
 import static com.simple.common.base.key.Const.Sql.LEFT_BRACKET;
 import static com.simple.common.base.key.Const.Sql.NO_UPDATE;
@@ -82,7 +81,7 @@ public final class FieldUtil {
     }
 
     // ==================== 插入构造 ====================
-    public static <T> Insert<T> snowId(List<Field> fields, T t, Object id, String idName) {
+    public static <T> Insert<T> snowId(List<Field> fields, T t, Object id, String idName,String fieldName) {
         Insert<T> insert = new Insert<>();
         // 先填充空字段
         fields.stream()
@@ -93,7 +92,7 @@ public final class FieldUtil {
                         setFieldValue(f, t, LocalDateTime.now());
                     } else if (name.equals(CREATE_BY)) {
                         setFieldValue(f, t, userId());
-                    } else if (name.equals(DR)) {
+                    } else if (name.equals(fieldName)) {
                         setFieldValue(f, t, BYTE_0);
                     } else if (StringUtil.toLine(name).equals(idName)) {
                         setFieldValue(f, t, id);
@@ -115,7 +114,7 @@ public final class FieldUtil {
         return insert;
     }
 
-    public static <T> Insert<T> autoId(List<Field> fields, T t) {
+    public static <T> Insert<T> autoId(List<Field> fields, T t,String fieldName) {
         Insert<T> insert = new Insert<>();
 
         // 自动填充审计字段
@@ -127,7 +126,7 @@ public final class FieldUtil {
                         setFieldValue(f, t, LocalDateTime.now());
                     } else if (name.equals(CREATE_BY) && userId() > LONG_0) {
                         setFieldValue(f, t, userId());
-                    } else if (name.equals(DR)) {
+                    } else if (name.equals(fieldName)) {
                         setFieldValue(f, t, BYTE_0);
                     }
                 });

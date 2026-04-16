@@ -39,7 +39,7 @@ public abstract class BaseCondition {
     @Accessors(chain = true)
     private String orders = EMPTY;// 排序子句
     @Schema(hidden = true)
-    private String dataAuth = EMPTY;// 权限子句
+    private String extendCondition = EMPTY;// 扩展条件(权限子句...)
     @Schema(description = "页大小")
     private Integer size = INT_10;// 页大小(每页记录个数)
     @Schema(description = "当前页")
@@ -108,7 +108,7 @@ public abstract class BaseCondition {
         condition.setLength(INT_0);/* 清除查询条件 */
         paramList.clear();
         addCondition();
-        condition.append(dataAuth);
+        condition.append(extendCondition);
         return condition.toString();
     }
 
