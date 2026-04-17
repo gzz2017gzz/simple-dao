@@ -52,6 +52,17 @@ public final class FieldUtil {
     public static Long userId() {
         return  1000L;
     }
+//    public static HttpSession session() {
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        return attributes == null ? null : attributes.getRequest().getSession(false);
+//    }
+//
+//    public static Long userId() {
+//        HttpSession session = session();
+//        if (session == null) return 0L;
+//        Object userIdObj = session.getAttribute(USER_ID);
+//        return (userIdObj instanceof Long) ? (long) userIdObj : 0;
+//    }
     // ==================== 内部数据载体 ====================
     private record FieldUpdate(String column, Object value) {
     }
