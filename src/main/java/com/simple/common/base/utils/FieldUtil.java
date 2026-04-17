@@ -81,7 +81,7 @@ public final class FieldUtil {
     }
 
     // ==================== 插入构造 ====================
-    public static <T> Insert<T> snowId(List<Field> fields, T t, Object id, String idName,String fieldName) {
+    public static <T> Insert<T> snowId(List<Field> fields, T t, Object id, String idName,String fieldName,Long userId) {
         Insert<T> insert = new Insert<>();
         // 先填充空字段
         fields.stream()
@@ -91,7 +91,7 @@ public final class FieldUtil {
                     if (name.equals(CREATE_TIME)) {
                         setFieldValue(f, t, LocalDateTime.now());
                     } else if (name.equals(CREATE_BY)) {
-                        setFieldValue(f, t, userId());
+                        setFieldValue(f, t, userId);
                     } else if (name.equals(fieldName)) {
                         setFieldValue(f, t, BYTE_0);
                     } else if (StringUtil.toLine(name).equals(idName)) {
@@ -114,7 +114,7 @@ public final class FieldUtil {
         return insert;
     }
 
-    public static <T> Insert<T> autoId(List<Field> fields, T t,String fieldName) {
+    public static <T> Insert<T> autoId(List<Field> fields, T t,String fieldName,Long userId) {
         Insert<T> insert = new Insert<>();
 
         // 自动填充审计字段
@@ -124,8 +124,8 @@ public final class FieldUtil {
                     String name = f.getName();
                     if (name.equals(CREATE_TIME)) {
                         setFieldValue(f, t, LocalDateTime.now());
-                    } else if (name.equals(CREATE_BY) && userId() > LONG_0) {
-                        setFieldValue(f, t, userId());
+                    } else if (name.equals(CREATE_BY) && userId > LONG_0) {
+                        setFieldValue(f, t, userId);
                     } else if (name.equals(fieldName)) {
                         setFieldValue(f, t, BYTE_0);
                     }
@@ -145,7 +145,7 @@ public final class FieldUtil {
     }
 
     // ==================== 更新构造（条件更新） ====================
-    private static <T, C extends BaseCondition> Update buildUpdate(List<Field> fields, T t, C c, boolean includeNull) {
+    private static <T, C extends BaseCondition> Update buildUpdate(List<Field> fields, T t, C c, boolean includeNull,Long userId) {
         Update update = new Update();
         // 收集需要更新的字段及其值
         List<FieldUpdate> updates = fields.stream()
@@ -154,8 +154,8 @@ public final class FieldUtil {
                     Object value = getFieldValue(field, t);
                     if (name.equals(UPDATE_TIME)) {
                         return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), LocalDateTime.now()));
-                    } else if (name.equals(UPDATE_BY) && userId() > LONG_0) {
-                        return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), userId()));
+                    } else if (name.equals(UPDATE_BY) && userId > LONG_0) {
+                        return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), userId));
                     } else if (includeNull || (!NO_UPDATE.contains(name) && value != null)) {
                         return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), value));
                     } else {
@@ -174,16 +174,16 @@ public final class FieldUtil {
         return update;
     }
 
-    public static <T, C extends BaseCondition> Update byCondition(List<Field> fields, T t, C c) {
-        return buildUpdate(fields, t, c, false);
+    public static <T, C extends BaseCondition> Update byCondition(List<Field> fields, T t, C c,Long userId) {
+        return buildUpdate(fields, t, c, false,userId);
     }
 
-    public static <T, C extends BaseCondition> Update byConditionWithNull(List<Field> fields, T t, C c) {
-        return buildUpdate(fields, t, c, true);
+    public static <T, C extends BaseCondition> Update byConditionWithNull(List<Field> fields, T t, C c,Long userId) {
+        return buildUpdate(fields, t, c, true,userId);
     }
 
     // ==================== 更新构造（主键更新） ====================
-    private static <T> Update buildUpdateByObject(List<Field> allFields, T t, boolean includeNull) {
+    private static <T> Update buildUpdateByObject(List<Field> allFields, T t, boolean includeNull,Long userId) {
         // 分离主键和非主键
         List<Field> idFields = allFields.stream().filter(f -> f.getDeclaredAnnotationsByType(Id.class).length > 0).toList();
         List<Field> noIdFields = allFields.stream().filter(f -> f.getDeclaredAnnotationsByType(Id.class).length == 0).toList();
@@ -196,7 +196,7 @@ public final class FieldUtil {
                     if (name.equals(UPDATE_TIME)) {
                         return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), LocalDateTime.now()));
                     } else if (name.equals(UPDATE_BY)) {
-                        return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), userId()));
+                        return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), userId));
                     } else if (includeNull || (value != null && !NO_UPDATE.contains(name))) {
                         return Stream.of(new FieldUpdate(T + StringUtil.toLine(name), value));
                     } else {
@@ -216,11 +216,11 @@ public final class FieldUtil {
         return update;
     }
 
-    public static <T> Update byObject(List<Field> fields, T t) {
-        return buildUpdateByObject(fields, t, false);
+    public static <T> Update byObject(List<Field> fields, T t ,Long userId) {
+        return buildUpdateByObject(fields, t, false,userId);
     }
 
-    public static <T> Update byObjectWithNull(List<Field> fields, T t) {
-        return buildUpdateByObject(fields, t, true);
+    public static <T> Update byObjectWithNull(List<Field> fields, T t,Long userId) {
+        return buildUpdateByObject(fields, t, true,userId);
     }
 }

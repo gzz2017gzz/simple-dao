@@ -22,7 +22,6 @@ import static com.simple.common.base.utils.FieldUtil.byConditionWithNull;
 import static com.simple.common.base.utils.FieldUtil.byObject;
 import static com.simple.common.base.utils.FieldUtil.byObjectWithNull;
 import static com.simple.common.base.utils.FieldUtil.snowId;
-import static com.simple.common.base.utils.FieldUtil.userId;
 import static com.simple.common.base.utils.ReflectUtil.getValue;
 import static com.simple.common.base.utils.ReflectUtil.hasDr;
 import static com.simple.common.base.utils.ReflectUtil.idName;
@@ -40,6 +39,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.GenericTypeResolver;
@@ -96,7 +96,7 @@ public class BaseDao<T> extends BaseSql {
 	 * @方法说明 按条件修改记录(null不参与update)
 	 */
 	public <C extends BaseCondition> int update(final T t, final C c) {
-		FieldUtil.Update update = byCondition(fields, t, c);
+		FieldUtil.Update update = byCondition(fields, t, c,currentUserId());
 		String sql = Sql.builder().update().table(table).set(update.sql()).sql();
 		return update(sql, update.array);
 	}
@@ -107,7 +107,7 @@ public class BaseDao<T> extends BaseSql {
 	 * @方法说明 按条件修改记录(null参与update)
 	 */
 	public <C extends BaseCondition> int updateNull(final T t, final C c) {
-		FieldUtil.Update update = byConditionWithNull(fields, t, c);
+		FieldUtil.Update update = byConditionWithNull(fields, t, c,currentUserId());
 		String sql = Sql.builder().update().table(table).set(update.sql()).sql();
 		return update(sql, update.array);
 	}
@@ -117,7 +117,7 @@ public class BaseDao<T> extends BaseSql {
 	 * @方法说明 按主键修改记录(null不参与update)
 	 */
 	public int update(final T t) {
-		FieldUtil.Update update = byObject(fields, t);
+		FieldUtil.Update update = byObject(fields, t,currentUserId());
 		String sql = Sql.builder().update().table(table).set(update.sql()).sql();
 		return update(sql, update.array);
 	}
@@ -127,7 +127,7 @@ public class BaseDao<T> extends BaseSql {
 	 * @方法说明 按主键修改记录(null参与update)
 	 */
 	public int updateNull(final T t) {
-		FieldUtil.Update update = byObjectWithNull(fields, t);
+		FieldUtil.Update update = byObjectWithNull(fields, t,currentUserId());
 		String sql = Sql.builder().update().table(table).set(update.sql()).sql();
 		return update(sql, update.array);
 	}
@@ -143,17 +143,17 @@ public class BaseDao<T> extends BaseSql {
 	public T save(boolean show, final T t) {
 		if (SNOW.equals(idType) || UUID.equals(idType)) {
 			Object id = SNOW.equals(idType) ? SnowflakeId.nextId() : uuid();
-			FieldUtil.Insert<T> insert = snowId(fields, t, id, idName, logicDeleteField);
+			FieldUtil.Insert<T> insert = snowId(fields, t, id, idName, logicDeleteField,currentUserId());
 			String sql = Sql.builder().insert().into().table(table).values(insert.sql()).sql();
 			save(show, insert.t, sql);
 			return insert.t;
 		} else if (CUSTOM.equals(idType)) {
-			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField);
+			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField,currentUserId());
 			String sql = Sql.builder().insert().into().table(table).values(insert.sql()).sql();
 			save(insert.t, sql);
 			return insert.t;
 		} else {
-			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField);
+			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField,currentUserId());
 			String sql = Sql.builder().insert().into().table(table).values(insert.sql()).sql();
 			return saveKey(show, insert.t, sql, idName);
 		}
@@ -166,19 +166,19 @@ public class BaseDao<T> extends BaseSql {
 	public T replace(final T t) {
 		if (SNOW.equals(idType) || UUID.equals(idType)) {
 			if (!FieldUtil.idIsNull(fieldMap, t, idName)) {
-				FieldUtil.Update update = byObject(fields, t);
+				FieldUtil.Update update = byObject(fields, t,currentUserId());
 				String sql = Sql.builder().update().table(table).set(update.sql()).sql();
 				update(sql, update.array);
 				return t;
 			} else {
 				Object id = SNOW.equals(idType) ? SnowflakeId.nextId() : uuid();
-				FieldUtil.Insert<T> insert = snowId(fields, t, id, idName, logicDeleteField);
+				FieldUtil.Insert<T> insert = snowId(fields, t, id, idName, logicDeleteField,currentUserId());
 				String sql = Sql.builder().insert().into().table(table).values(insert.sql()).sql();
 				save(insert.t, sql);
 				return insert.t;
 			}
 		} else {
-			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField);
+			FieldUtil.Insert<T> insert = autoId(fields, t, logicDeleteField,currentUserId());
 			String sql = Sql.builder().replace().into().table(table).values(insert.sql()).sql();
 			return saveKey(insert.t, sql, idName);
 		}
@@ -319,7 +319,7 @@ public class BaseDao<T> extends BaseSql {
 						f.set(t, dateTime);
 					}
 					if (name.equals(CREATE_BY)) {
-						f.set(t, userId());
+						f.set(t, currentUserId());
 					}
 					if (name.equals(logicDeleteField)) {
 						f.set(t, BYTE_0);
@@ -329,7 +329,7 @@ public class BaseDao<T> extends BaseSql {
 						f.set(t, dateTime);
 					}
 					if (name.equals(UPDATE_BY)) {
-						f.set(t, userId());
+						f.set(t, currentUserId());
 					}
 				}
 			}
@@ -380,5 +380,15 @@ public class BaseDao<T> extends BaseSql {
 			sql = Sql.builder().delete().from().table(table).as().where(c).sql();
 		}
 		return update(show, sql, c.array());
+	}
+	@Autowired
+	private UserIdProvider userIdProvider;
+
+	/**
+	 * 获取当前操作用户ID，子类可覆盖以实现自定义获取逻辑
+	 * @return 当前用户ID
+	 */
+	protected Long currentUserId() {
+	    return userIdProvider.userId();
 	}
 }
