@@ -3,18 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.gitee.simpledao</groupId>
     <artifactId>simple-dao</artifactId>
     <version>1.2.0</version>
-
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.javadoc.encoding>UTF-8</maven.javadoc.encoding>
         <maven.javadoc.charSet>UTF-8</maven.javadoc.charSet>
-        <!-- 定义你在开发时使用的 Spring Boot 版本，用于导入 BOM -->
         <spring-boot.version>3.3.11</spring-boot.version>
     </properties>
     <dependencyManagement>
@@ -66,7 +63,6 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -138,7 +134,6 @@
     </build>
     <name>SimpleDAO</name>
     <description>A persistence layer framework based on the SQL-First paradigm</description>
-
     <licenses>
         <license>
             <name>Apache License 2.0</name>
