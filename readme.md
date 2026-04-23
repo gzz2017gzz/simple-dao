@@ -112,6 +112,19 @@ SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原
 | **能力上限** | ❌ 框架限制，部分 SQL 写不出来 | ❌ JPQL 能力远弱于 SQL | ✅ **上限 = SQL 的上限** |
 
 ---
+## ⚙️ 配置项
+
+| 配置项 | 默认值 | 说明 |
+| :--- | :--- | :--- |
+| `simple-dao.show-sql` | `true` | 是否打印带参 SQL 日志 |
+| `simple-dao.logic-delete.field` | `dr` | 逻辑删除字段名 |
+| `simple-dao.dialect` | 自动检测 | 数据库方言：`mysql`、`postgresql`、`sqlserver`、`oracle` |
+
+**方言三级降级策略**：显式配置 > 自动检测 > 兜底 MySQL。
+
+无需配置即可自动适配 MySQL、H2、SQLite、PostgreSQL、SQL Server、Oracle 分页语法。
+
+---
 
 ## 🚀 功能亮点：生产级特性全覆盖
 

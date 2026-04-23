@@ -50,6 +50,17 @@ public Page<UserVO> pageJoin(UserCond cond) {
     return page(JOIN_SQL, cond, UserVO.class);
 }
 ```
+## ⚙️ Configuration
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `simple-dao.show-sql` | `true` | Print parameterized SQL to log |
+| `simple-dao.logic-delete.field` | `dr` | Logical delete column name |
+| `simple-dao.dialect` | Auto-detected | Database dialect: `mysql`, `postgresql`, `sqlserver`, `oracle` |
+
+**Dialect resolution** (three-tier fallback): explicit configuration > automatic detection > MySQL default.
+
+No manual configuration is required for MySQL, H2, SQLite, PostgreSQL, SQL Server, or Oracle pagination – SimpleDAO adapts automatically.
 
 ## 🚀 Five-Dimensional Enterprise-Grade Pain Point Solutions
 ### 1. Development Efficiency: Cut Redundancy, Maximize Productivity (9 Points)

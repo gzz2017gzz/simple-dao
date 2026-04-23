@@ -1,1 +1,2 @@
 com.simple.common.base.SimpleDaoAutoConfiguration
+com.simple.common.base.dialect.DialectAutoConfiguration

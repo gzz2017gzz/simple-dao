@@ -24,7 +24,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import com.simple.common.base.utils.ReflectUtil;
 import com.simple.common.base.utils.Sql;
 import com.simple.common.base.dialect.DbDialect;
-import com.simple.common.base.dialect.MySqlDialect;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -40,12 +39,9 @@ public abstract class BaseSql {
 	protected JdbcTemplate jdbc;// 注入jdbc模板(占位符)
 	@Autowired
 	protected NamedParameterJdbcTemplate namedJdbc;// 注入jdbc模板(命名参数)
-	private DbDialect dialect = new MySqlDialect(); // 默认 MySQL
-
-	public void setDialect(DbDialect dialect) {
-		if (dialect != null)
-			this.dialect = dialect;
-	}
+ 
+	@Autowired
+	private DbDialect dialect;
 
 	/**
 	 * @param sql   自定义SQL语句

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.gitee.simpledao</groupId>
     <artifactId>simple-dao</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>

@@ -1,5 +1,7 @@
 package com.simple.common.base.dialect;
 
+import java.sql.Connection;
+
 /**
  * @author 高振中
  * @summary 【数据库方言】—— 只封装分页语法差异
@@ -12,7 +14,8 @@ public interface DbDialect {
 
 	// ============ 工厂方法 ============
 
-	static DbDialect of(java.sql.Connection conn, String configDialect) {
+	static DbDialect of(Connection conn, String configDialect) {
+
 		// 1. 显式配置优先
 		if (configDialect != null && !configDialect.isBlank()) {
 			return fromName(configDialect);
@@ -27,18 +30,16 @@ public interface DbDialect {
 					return new SqlServerDialect();
 				if (name.contains("oracle"))
 					return new OracleDialect();
-				if (name.contains("h2"))
-					return new MySqlDialect();
 			} catch (Exception ignored) {
 			}
 		}
-		// 3. 兜底 MySQL
+		// 3. MySQL、H2、SQLite 等直接走兜底
 		return new MySqlDialect();
 	}
 
 	private static DbDialect fromName(String name) {
 		return switch (name.toLowerCase()) {
-		case "mysql", "mariadb", "h2" -> new MySqlDialect();
+		case "mysql", "mariadb", "h2", "sqlite" -> new MySqlDialect();
 		case "postgresql", "postgres" -> new PostgreSqlDialect();
 		case "sqlserver", "mssql" -> new SqlServerDialect();
 		case "oracle" -> new OracleDialect();
