@@ -7,8 +7,8 @@
 
 ## 🚀 Quick Start
 
-> 👉 Try it now: [SimpleDAO Complete Examples](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme.md)
-> 👉 API Quick Reference: [SimpleDAO API](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/api.md)
+> 👉 Try it now: [SimpleDAO Complete Examples](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme-en.md)
+> 👉 API Quick Reference: [SimpleDAO API](api-en.md)
 
 ## 📋 Content Navigation
 - [Core Philosophy](#✨-core-philosophy:-simplicity-is-the-ultimate-sophistication)
