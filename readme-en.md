@@ -395,7 +395,7 @@ A: Implementations exist for 8 major backend languages: Python, PHP, Go, C++, No
 
 ## 📚 Further Reading
 
-- [📄 SimpleDAO Quick Start (run complete examples)](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
+- [📄 SimpleDAO Quick Start (run complete examples)](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme-en.md)
 
 ---
 
