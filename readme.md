@@ -124,6 +124,8 @@ SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原
 
 无需配置即可自动适配 MySQL、H2、SQLite、PostgreSQL、SQL Server、Oracle 分页语法。
 
+同时支持全部有JDBC Dirver的国产数据库。
+
 ---
 
 ## 🚀 功能亮点：生产级特性全覆盖
