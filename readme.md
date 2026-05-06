@@ -1,8 +1,8 @@
 
-# SimpleDAO - 企业级数据访问的革命
+# SimpleDAO - A Revolution in Enterprise Data Access
 
-> **SQL-First · 白盒透明 · 非ORM框架**  
-> **能力上限 = SQL 表达的上限 = Spring 生态的上限**
+> **SQL-First · White-box Transparency · Non-ORM Framework**  
+> **Capability limit = SQL expressiveness limit = Spring ecosystem limit**
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Java](https://img.shields.io/badge/java-21%2B-orange)](https://www.oracle.com/java/)
@@ -12,43 +12,44 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-> 👉 立即实操：[SimpleDAO 完整案例](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme.md)
-> 👉 API速查：[SimpleDAO API](api.md)
+> 👉 Try it now: [SimpleDAO Complete Examples](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme-en.md)
 
----
-
-## 📋 内容导航
-
-- [核心理念](#-核心理念sql-first-白盒透明)
-- [能力边界](#-能力边界没有天花板)
-- [我们不一样](#-我们不一样为什么抛弃传统orm)
-- [功能亮点](#-功能亮点生产级特性全覆盖)
-- [性能数据](#-性能数据--spring-jdbc不接受反驳)
-- [生态集成](#-生态集成100-spring原生)
-- [与MyBatis共存](#-与mybatis无缝共存零成本迁移)
-- [快速开始](#-快速开始)
-- [核心价值](#-核心价值总结)
-- [常见问题](#-常见问题)
-- [深度阅读](#-深度阅读)
+> 👉 API Cheatsheet: [SimpleDAO API](api-en.md)
 
 ---
 
-## ✨ 核心理念：SQL-First，白盒透明
+## 📋 Table of Contents
 
-**数据库只认 SQL。** 50 年来，SQL 是关系型数据库唯一且通用的查询语言。任何试图“封装”、“替代”、“生成” SQL 的框架，最终都会变成开发者的额外负担。
+- [Core Philosophy](#-core-philosophy-sql-first-white-box-transparency)
+- [Capability Boundaries](#-capability-boundaries-no-ceiling)
+- [Why We Are Different](#-why-we-are-different-abandoning-traditional-orm)
+- [Feature Highlights](#-feature-highlights-production-grade-coverage)
+- [Performance Data](#-performance-data--spring-jdbc-no-argument)
+- [Ecosystem Integration](#-ecosystem-integration-100-spring-native)
+- [Coexistence with MyBatis](#-zero-cost-migration-coexist-with-mybatis)
+- [Quick Start](#-quick-start)
+- [Core Value Summary](#-core-value-summary)
+- [FAQ](#-faq)
+- [Further Reading](#-further-reading)
 
-SimpleDAO 不制造新的 SQL 方言，不封装 SQL 关键字，不扭曲 SQL 语义，不制造新的错误体系。你手写的 SQL，就是最终在数据库中执行的 SQL——框架不做任何改写、拦截、黑盒处理。
+---
+
+## ✨ Core Philosophy: SQL-First, White-box Transparency
+
+**The database only understands SQL.** For 50 years, SQL has been the only universal query language for relational databases. Any framework that attempts to "encapsulate", "replace", or "generate" SQL ultimately becomes an additional burden on developers.
+
+SimpleDAO does not invent new SQL dialects, does not encapsulate SQL keywords, does not distort SQL semantics, and does not invent new error systems. The SQL you write by hand is the exact SQL executed in the database – the framework does not rewrite, intercept, or black-box process it.
 
 ```java
-// 单表操作：继承 BaseDao，零代码
+// Single-table operations: extend BaseDao, zero code
 @Repository
 public class UserDao extends BaseDao<User> {
-    // 空类获得所有 CRUD 能力
+    // Empty class gains full CRUD capabilities
 }
 
-// 联表查询：原生 SQL，直接高效
+// Join queries: native SQL, direct and efficient
 private static final String JOIN_SQL = """
     SELECT u.*, d.dept_name, r.role_name
     FROM user u
@@ -57,7 +58,7 @@ private static final String JOIN_SQL = """
     LEFT JOIN role r ON ur.role_id = r.id
     """;
 
-// 同样的 API，统一的体验
+// Same API, consistent experience
 public Page<UserVO> pageJoin(UserCond cond) {
     return page(JOIN_SQL, cond, UserVO.class);
 }
@@ -65,254 +66,252 @@ public Page<UserVO> pageJoin(UserCond cond) {
 
 ---
 
-## 🚀 能力边界：没有天花板
+## 🚀 Capability Boundaries: No Ceiling
 
-### 1. SQL 能力无上限
+### 1. SQL Capability Unlimited
 
-SimpleDAO 对复杂场景的支持**没有上限**——它的上限就是 **SQL 表达的上限**。
+SimpleDAO has **no upper limit** on complex scenarios – its ceiling is the **expressiveness of SQL** itself.
 
-- 单表 CRUD、多表联查、嵌套子查询、聚合报表、窗口函数、递归 CTE、存储过程调用……**只要数据库 SQL 能写，SimpleDAO 就能直接执行**。
-- 不预设“框架支持哪些 SQL 特性”——因为框架根本不解析 SQL。你写什么，数据库就执行什么。
-- 不存在“框架能力盲区”，不存在“部分场景兜底”的妥协设计。
+- Single-table CRUD, multi-table joins, nested subqueries, aggregate reports, window functions, recursive CTEs, stored procedure calls… **if the database SQL can write it, SimpleDAO can execute it directly**.
+- No pre‑set “which SQL features the framework supports” – because the framework never parses SQL. Whatever you write, the database executes.
+- No “framework blind spots”, no “fallback design” for certain scenarios.
 
-### 2. Spring 生态扩展无上限
+### 2. Spring Ecosystem Extension Unlimited
 
-SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原生功能延伸与增强**。
+SimpleDAO is not a third‑party wrapper around Spring JDBC; it is a **native extension and enhancement of Spring JDBC** itself.
 
-- **事务**：直接用 `@Transactional`，100% 兼容 Spring 事务管理。
-- **多数据源**：Spring 多数据源直接使用，无需任何适配。
-- **连接池**：HikariCP、Druid 等任意连接池，按 Spring Boot 标准配置。
-- **缓存**：Spring Cache 注解在 Service 层，与 DAO 无关。
-- **AOP**：数据权限、多租户、日志等，用 Spring AOP 无侵入扩展。
-- **监控**：Spring Boot Actuator 监控数据源健康、SQL 执行情况。
+- **Transactions**: Use `@Transactional` directly, 100% compatible with Spring transaction management.
+- **Multiple Data Sources**: Use Spring’s multi‑data source configuration directly, no adapter needed.
+- **Connection Pools**: Any pool (HikariCP, Druid, etc.) works with standard Spring Boot configuration.
+- **Caching**: Spring Cache annotations on the service layer, independent of DAO.
+- **AOP**: Data permissions, multi‑tenancy, logging – extend non‑invasively with Spring AOP.
+- **Monitoring**: Spring Boot Actuator monitors data source health and SQL execution.
 
-**结论：SimpleDAO 的能力上限 = Spring 生态的上限，没有任何人为设置的边界。**
+**Conclusion: SimpleDAO’s capability ceiling = Spring ecosystem’s ceiling – no artificial limits.**
 
-### 3. 性能对齐 Spring JDBC
+### 3. Performance Aligned with Spring JDBC
 
-- **启动时反射，运行时零反射**：所有元数据在启动时解析一次并缓存（双引用缓存设计），运行时无任何反射开销。
-- **单表才读元数据，联表完全不读**：联表查询直接用你提供的 SQL，框架不解析任何实体或注解。
-- **条件拼接开销可忽略**：字符串拼接 + List.add 的成本，相比数据库网络 I/O 和磁盘 I/O 完全可以忽略。且条件拼接是业务刚需——任何框架都绕不开。
-- **最终执行层就是 `JdbcTemplate`**：无中间拦截器、无动态代理、无缓存污染。
+- **Reflection at startup, zero reflection at runtime**: All metadata is parsed once at startup and cached (dual-reference cache). No reflection overhead at runtime.
+- **Metadata read only for single‑table operations, never for joins**: For joins, SimpleDAO uses the SQL you provide directly; it does not parse any entities or annotations.
+- **Condition‑building overhead negligible**: The cost of string concatenation + `List.add` is negligible compared to database network and disk I/O. Moreover, condition‑building is a business necessity – any framework has to do it.
+- **Ultimate execution layer is `JdbcTemplate`**: No interceptors, no dynamic proxies, no cache pollution.
 
-**SimpleDAO 的性能 ≈ Spring JDBC 的性能。任何质疑在技术上都不成立。**
-
----
-
-## 🎯 我们不一样：为什么抛弃传统 ORM？
-
-### 📌简单场景（CRUD、分页、条件）
-
-| 维度 | JPA/Hibernate | MyBatis生态 | SimpleDAO |
-|------|:---:|:---:|:---:|
-| 单表CRUD | 需配Entity + Repository | 需写SQL或引入MP | **继承空类，零代码** |
-| 配置量 | 中（注解+接口） | 高（XML+接口+实体） | **零（两个注解）** |
-| 动态条件 | Criteria API，冗长 | XML标签，一行变三行 | **一行add** |
-| 条件统一性 | 两套（JPQL+Criteria） | 两套（XML+注解SQL） | **一套通用** |
-| 审计字段 | 手写或Listener | 手写或MP插件 | **自动填充** |
-| 逻辑删除 | 需@SQLDelete | 需插件或手写 | **自动处理** |
-| 分页 | Pageable，SQL不可控 | PageHelper或手写 | **page()一行** |
-
+**SimpleDAO performance ≈ Spring JDBC performance. Any doubt is technically unjustified.**
 
 ---
 
-### 📌复杂场景（联表、报表、SQL能力）
+## 🎯 Why We Are Different: Abandoning Traditional ORM?
 
-| 维度 | JPA/Hibernate | MyBatis生态 | SimpleDAO |
-|------|:---:|:---:|:---:|
-| 代码量 | 中 | 高 | **1/4 ~ 1/3** |
-| SQL能力 | 约1/3能力 | 全能力，标签繁琐 | **全能力，无限制** |
-| 报表/子查询 | 几乎不可用 | 极其痛苦 | **原生支持，条件复用** |
-| 复杂联表 | 不可维护，退回原生 | 标签地狱，SQL切碎 | **完整SQL直写** |
-| 结果映射 | 自动但黑盒 | resultMap，写两遍 | **自动映射VO** |
-| 扩展性 | 黑盒难扩展 | 扒拦截器，升级就崩 | **白盒，AOP通吃** |
-| SQL优化主权 | 完全丧失 | 半遮半掩 | **完全掌控** |
-| 数据权限 | Listener+黑盒 | 拦截器，20行摸不到边 | **AOP，10分钟** |
-| 字段脱敏 | 绑实体 | 写TypeHandler | **AOP，绑行为** |
-| SQL调试 | 翻代理日志 | 手动替换占位符 | **复制即执行** |
+### 📌Simple Scenarios (CRUD, pagination, conditions)
 
+| Dimension | JPA/Hibernate | MyBatis Ecosystem | SimpleDAO |
+|-----------|:-------------:|:-----------------:|:---------:|
+| Single-table CRUD | Requires Entity + Repository | Requires SQL or MP | **Extend empty class, zero code** |
+| Configuration volume | Medium (annotations + interfaces) | High (XML + interfaces + entities) | **Zero (only two annotations)** |
+| Dynamic conditions | Criteria API, verbose | XML tags, one line becomes three | **One line of add** |
+| Condition uniformity | Two sets (JPQL + Criteria) | Two sets (XML + annotation SQL) | **One universal set** |
+| Audit fields | Manual or Listener | Manual or MP plugin | **Auto‑filled** |
+| Logical delete | Requires @SQLDelete | Requires plugin or manual | **Auto‑handled** |
+| Pagination | Pageable, SQL uncontrollable | PageHelper or manual | **One-line page()** |
 
 ---
 
-### 📌综合能力（执行、扩展、风险、生态）
+### 📌Complex Scenarios (joins, reports, SQL capabilities)
 
-| 维度 | JPA/Hibernate | MyBatis生态 | SimpleDAO |
-|------|:---:|:---:|:---:|
-| 学习成本 | 极高 | 高 | **极低（会SQL就会用）** |
-| 性能 | 约95% | 95-97% | **99%，天花板** |
-| 全数据库（含国产） | 等Dialect，遥遥无期 | 插件逐个适配 | **有驱动就能用，全支持** |
-| Spring生态红利 | 可用 | 桥接适配 | **事务/多数据源/缓存…拿来就用** |
-| 扩展机制 | Listener/Callback | Interceptor，高门槛 | **AOP，零门槛** |
-| 错误来源 | 框架+业务 | **31类自造异常**+业务 | **仅数据库/业务** |
-| 社区本质 | 规范讨论组 | **受害者联盟** | **没问题可问** |
-| 知识迁移 | 局限JPA生态 | 局限MyBatis生态 | **通用SQL，终身受益** |
-| AI友好 | 需学专有API | 需学标签和OGNL | **零私有语法，Token省70%** |
+| Dimension | JPA/Hibernate | MyBatis Ecosystem | SimpleDAO |
+|-----------|:-------------:|:-----------------:|:---------:|
+| Lines of code | Medium | High | **1/4 ~ 1/3** |
+| SQL capability | ~1/3 of SQL | Full, but verbose tags | **Full, unlimited** |
+| Reports / subqueries | Almost unusable | Extremely painful | **Native support, condition reuse** |
+| Complex joins | Unmaintainable, fallback to native | Tag hell, SQL fragmented | **Complete SQL written directly** |
+| Result mapping | Automatic but black‑box | resultMap, write twice | **Auto‑mapped to VO** |
+| Extensibility | Black‑box, hard to extend | Dig into interceptors, break on upgrade | **White‑box, AOP everywhere** |
+| SQL optimization sovereignty | Completely lost | Half‑hidden | **Full control** |
+| Data permissions | Listener + black‑box | Interceptor, 20 lines not touching business | **AOP, 10 minutes** |
+| Field desensitization | Tied to entity | Write TypeHandler | **AOP, bound to behavior** |
+| SQL debugging | Dig through proxy logs | Manual placeholder replacement | **Copy and execute** |
+
+---
+
+### 📌Comprehensive Capabilities (execution, extension, risk, ecosystem)
+
+| Dimension | JPA/Hibernate | MyBatis Ecosystem | SimpleDAO |
+|-----------|:-------------:|:-----------------:|:---------:|
+| Learning curve | Extremely high | High | **Very low (know SQL, you're good)** |
+| Performance | ~95% | 95-97% | **99%, ceiling** |
+| All databases (including domestic) | Wait for Dialect, endless | Plugins one‑by‑one | **Works with any JDBC driver, full support** |
+| Spring ecosystem红利 | Usable | Bridge/adapter needed | **Out‑of‑the‑box: transactions, multi‑data source, cache…** |
+| Extension mechanism | Listener/Callback | Interceptor, high barrier | **AOP, zero barrier** |
+| Error sources | Framework + business | **31 kinds of self‑inflicted exceptions** + business | **Only database/business** |
+| Community nature | Specification discussion group | **Victim alliance** | **No questions to ask** |
+| Knowledge transfer | Limited to JPA ecosystem | Limited to MyBatis ecosystem | **Universal SQL, lifelong benefit** |
+| AI‑friendly | Need to learn proprietary API | Need to learn tags and OGNL | **Zero private syntax, 70% less tokens** |
 
 ---
 
-**📌SimpleDAO vs JPA：把SQL能力天花板拆了**
+**📌SimpleDAO vs JPA: Removes SQL capability ceiling**
 
-**📌SimpleDAO vs MyBatis：把XML枷锁卸了**
+**📌SimpleDAO vs MyBatis: Removes XML shackles**
 
-**📌SimpleDAO vs Spring JDBC：把手工拼条件苦力自动化了**
+**📌SimpleDAO vs Spring JDBC: Automates manual condition‑building drudgery**
 
-**📌补齐了三大主力的全部短板**
-
+**📌Fills all the gaps of the three major players**
 
 ---
-## ⚙️ 配置项
 
-| 配置项 | 默认值 | 说明 |
+## ⚙️ Configuration
+
+| Property | Default | Description |
 | :--- | :--- | :--- |
-| `simple-dao.show-sql` | `true` | 是否打印带参 SQL 日志 |
-| `simple-dao.logic-delete.field` | `dr` | 逻辑删除字段名 |
-| `simple-dao.dialect` | 自动检测 | 数据库方言：`mysql`、`postgresql`、`sqlserver`、`oracle` |
+| `simple-dao.show-sql` | `true` | Whether to print SQL with parameters |
+| `simple-dao.logic-delete.field` | `dr` | Logical delete field name |
+| `simple-dao.dialect` | auto‑detect | Database dialect: `mysql`, `postgresql`, `sqlserver`, `oracle` |
 
-**方言三级降级策略**：显式配置 > 自动检测 > 兜底 MySQL。
+**Three‑level dialect fallback strategy**: explicit configuration > auto‑detection > MySQL fallback.
 
-无需配置即可自动适配 MySQL、H2、SQLite、PostgreSQL、SQL Server、Oracle 分页语法。
+Automatically adapts pagination syntax for MySQL, H2, SQLite, PostgreSQL, SQL Server, Oracle out of the box.
 
-同时支持全部有JDBC Dirver的国产数据库。
+Also supports all domestic databases with a JDBC driver.
 
 ---
 
-## 🚀 功能亮点：生产级特性全覆盖
+## 🚀 Feature Highlights: Production‑Grade Coverage
 
-### 一、开发效率（砍掉冗余）
+### I. Development Efficiency (Eliminate Redundancy)
 
-#### 1. 终结 XML 配置地狱
+#### 1. End XML Configuration Hell
 ```java
 @Table("sys_user")
 public class User {
-    @Id("snow")  // 雪花主键
+    @Id("snow")  // Snowflake primary key
     private Long id;
-    private String userName;  // 自动映射为 user_name
+    private String userName;  // auto‑mapped to user_name
 }
 ```
-**对比**：无需 XML、ResultMap、association/collection 标签。
+**Comparison**: No XML, no ResultMap, no association/collection tags.
 
-#### 2. 统一单表/多表 API
+#### 2. Unified API for Single‑table / Multi‑table
 ```java
-// 单表
+// Single‑table
 userDao.page(userCond);
-// 多表（同样的 API）
+// Multi‑table (same API)
 userDao.page(joinSql, userCond, UserVO.class);
 ```
-**对比**：告别 MyBatis Plus 的 BaseMapper/XML 两套思维割裂。
+**Comparison**: Say goodbye to the two‑way mindset of MyBatis Plus (BaseMapper vs XML).
 
-#### 3. 极致简化的条件拼接
+#### 3. Extremely Simplified Condition Building
 ```java
 @Override
 protected void addCondition() {
-    and("name LIKE", name, 3);           // 主表模糊
-    and("age >=", ageMin);               // 主表区间
-    in("id", ids);                       // IN 子句
-    add("AND r.refund_type IN ", types); // 关联表条件
-    add("AND (t.start_date = CURDATE() OR t.war_date = CURDATE())", flag); // SQL 片段
+    and("name LIKE", name, 3);           // main table fuzzy
+    and("age >=", ageMin);               // main table range
+    in("id", ids);                       // IN clause
+    add("AND r.refund_type IN ", types); // related table condition
+    add("AND (t.start_date = CURDATE() OR t.war_date = CURDATE())", flag); // SQL snippet
 }
 ```
-**对比**：告别 MyBatis 的 `<if>` 嵌套和 OGNL 表达式错误。
+**Comparison**: Say goodbye to MyBatis `<if>` nesting and OGNL expression errors.
 
-#### 4. 分页标准化（一行代码）
+#### 4. Standard Pagination (One Line)
 ```java
 Page<User> page = userDao.page(cond);
-// 自动包含：dataList、rowCount、page 信息
-// 智能 COUNT SQL 解析，避免子查询性能问题
+// Automatically includes: dataList, rowCount, page info
+// Intelligent COUNT SQL parsing to avoid subquery performance issues
 ```
 
-#### 5. 灵活的更新策略
+#### 5. Flexible Update Strategies
 ```java
-userDao.update(user);           // 非空字段更新（90% 场景）
-userDao.updateNull(user);       // 全字段更新（含 null）
-userDao.update(user, condition);// 条件更新
+userDao.update(user);           // Update non‑null fields (90% of cases)
+userDao.updateNull(user);       // Update all fields (including nulls)
+userDao.update(user, condition);// Conditional update
 ```
 
-#### 6. 高性能批处理
+#### 6. High‑Performance Batch Operations
 ```java
-userDao.saveBatch(userList);    // 批量插入
-userDao.replaceBatch(userList); // 批量替换（MySQL Upsert）
+userDao.saveBatch(userList);    // Batch insert
+userDao.replaceBatch(userList); // Batch replace (MySQL Upsert)
 ```
 
-#### 7. 自动审计字段
+#### 7. Automatic Audit Fields
 ```java
-userDao.save(user);   // 自动设置：id、createTime、createBy、dr=0
-userDao.update(user); // 自动设置：updateTime、updateBy
+userDao.save(user);   // Auto sets: id, createTime, createBy, dr=0
+userDao.update(user); // Auto sets: updateTime, updateBy
 ```
 
-### 二、数据安全（从源头构建防线）
+### II. Data Security (Built from the Source)
 
-#### 8. 根治 SQL 注入
-全链路参数化查询 + `BeanPropertyRowMapper` 类型映射，从 Java 到数据库的类型安全通道。
+#### 8. Eradicate SQL Injection
+Full‑chain parameterized queries + `BeanPropertyRowMapper` type mapping, a type‑safe channel from Java to the database.
 
-#### 9. 标准化软删除
+#### 9. Standardized Soft Delete
 ```java
 userDao.delete(1, 2, 3);
-// 有 dr 字段 → UPDATE SET dr=1
-// 无 dr 字段 → DELETE FROM
+// Has dr field → UPDATE SET dr=1
+// No dr field → DELETE FROM
 ```
 
-#### 10. 便捷行锁控制
+#### 10. Convenient Row Lock Control
 ```java
 User user = userDao.findById(1, true); // FOR UPDATE
 ```
 
-#### 11. 应用层外键约束（微服务专用）
+#### 11. Application‑Level Foreign Key Constraints (for Microservices)
 ```java
-userDao.checkRef = true;  // 开启引用检查
-// 删除时自动查询 sys_table_ref 配置，有引用则抛异常
+userDao.checkRef = true;  // Enable reference checking
+// On delete, automatically query sys_table_ref config; if references exist, throw exception
 ```
 
-#### 12. 防止全表误操作
-`update()` 执行前强制检查必须有 WHERE 条件，违规直接熔断。
+#### 12. Prevent Full‑Table Operations
+`update()` enforces a WHERE condition before execution; violation is immediately blocked.
 
-### 三、生产适配（复杂场景优雅方案）
+### III. Production Adaptability (Elegant Solutions for Complex Scenarios)
 
-#### 13. 奇葩数据库兼容
-自动识别并适配 OceanBase 等不支持 DELETE 别名的数据库。
+#### 13. Weird Database Compatibility
+Automatically detects and adapts to databases like OceanBase that do not support DELETE alias.
 
-#### 14. 分布式主键一体化
+#### 14. Integrated Distributed Primary Key
 ```java
 @Id("snow")
-private Long id;  // 雪花算法，支持反向解析时间戳
+private Long id;  // Snowflake algorithm, supports reverse timestamp parsing
 ```
 
-#### 15. 架构分层强制约束
-`BaseDao` 核心方法为 `protected`，从语法层面强制 Service 层作为中间层。
+#### 15. Enforced Layered Architecture
+Core methods in `BaseDao` are `protected`, syntactically forcing the Service layer as an intermediary.
 
-### 四、工程提效（全链路代码生成）
+### IV. Engineering Efficiency (Full‑Stack Code Generation)
 
-#### 16. 全栈代码生成器
-生成内容：Entity + DAO + Service + Controller + Condition + VO + 前端页面（Vue + Element）+ Swagger 注解 + 单元测试模板。**效率提升 80%**。
+#### 16. Full‑Stack Code Generator
+Generated content: Entity + DAO + Service + Controller + Condition + VO + Frontend pages (Vue + Element) + Swagger annotations + unit test templates. **80% productivity increase**.
 
-#### 17. 白盒化低代码
-生成的代码是标准 Java，不是黑盒魔法。你可以修改 Freemarker 模板、添加自定义模板、对接任意技术栈、进行 Code Review。
-
----
-
-## 📊 性能数据：≈ Spring JDBC
-
-| 操作类型 | SimpleDAO | Spring JDBC | MyBatis | JPA |
-|---------|-----------|-------------|---------|-----|
-| 单表插入 1000 条 | 120 ms | 120 ms | 210 ms (+68%) | 350 ms (+180%) |
-| 单表分页查询 | 43 ms | 43 ms | 80 ms (+78%) | 120 ms (+167%) |
-| 5 表联表分页 | 109 ms | 108 ms | 180 ms (+64%) | 250 ms (+127%) |
-| 复杂报表查询 | 196 ms | 195 ms | 350 ms (+75%) | 500 ms (+150%) |
-
-*SimpleDAO 与 Spring JDBC 性能几乎一致，差异在测量误差范围内。*
+#### 17. White‑box Low‑Code
+Generated code is standard Java, not black‑box magic. You can modify Freemarker templates, add custom templates, integrate with any tech stack, and perform Code Review.
 
 ---
 
-## 🌱 生态集成：100% Spring 原生
+## 📊 Performance Data: ≈ Spring JDBC
+
+| Operation Type | SimpleDAO | Spring JDBC | MyBatis | JPA |
+|----------------|-----------|-------------|---------|-----|
+| Insert 1000 rows | 120 ms | 120 ms | 210 ms (+68%) | 350 ms (+180%) |
+| Single‑table pagination | 43 ms | 43 ms | 80 ms (+78%) | 120 ms (+167%) |
+| 5‑table join pagination | 109 ms | 108 ms | 180 ms (+64%) | 250 ms (+127%) |
+| Complex report query | 196 ms | 195 ms | 350 ms (+75%) | 500 ms (+150%) |
+
+*SimpleDAO performance is nearly identical to Spring JDBC; differences are within measurement error.*
+
+---
+
+## 🌱 Ecosystem Integration: 100% Spring Native
 
 ```java
-// 事务
+// Transactions
 @Transactional
 public void businessMethod() {
     userDao.save(user);
     orderDao.save(order);
 }
 
-// 多数据源
+// Multiple Data Sources
 @Bean
 public DataSource masterDataSource() { ... }
 @Bean
@@ -324,7 +323,7 @@ public User getUser(Long id) {
     return userDao.findById(id);
 }
 
-// AOP 扩展
+// AOP Extension
 @Aspect
 public class DataAuthAspect {
     @Around("@annotation(BusinessAuth)")
@@ -332,112 +331,110 @@ public class DataAuthAspect {
 }
 ```
 
-**结论：SimpleDAO 不是“需要适配 Spring”，而是“本来就是 Spring 的一部分”。**
+**Conclusion: SimpleDAO is not “adapting to Spring” – it is part of Spring.**
 
 ---
 
-## 🤝 与 MyBatis 无缝共存：零成本迁移
+## 🤝 Zero-Cost Migration: Coexist with MyBatis
 
-这是 SimpleDAO 独有的核心优势：
+This is a unique core advantage of SimpleDAO:
 
-- 所有基于 MyBatis 开发的存量项目，**无需修改一行老代码**，仅需引入 SimpleDAO 依赖包，即可直接启用。
-- MyBatis 底层基于 Spring JDBC 桥接，SimpleDAO 完全基于 Spring JDBC 原生构建，二者共用同一套数据源与 Spring 底层能力。
-- **新老业务完全解耦、互不干扰**：
-  - 存量业务继续用 MyBatis
-  - 新增业务用 SimpleDAO
-  - 随着业务迭代，逐步平滑替换
-- 新项目直接基于 SimpleDAO 构建，彻底告别 MyBatis 的补坑生态。
-
----
-
-## 🏆 核心价值总结
-
-| 维度 | 传统 ORM | SimpleDAO |
-|------|----------|-----------|
-| **代码量** | 基准 | 减少 **60-80%** |
-| **开发时间** | 基准 | 缩短 **50%** |
-| **学习成本** | 2-5 天 | **20 分钟** |
-| **调试体验** | 占位符 SQL，手动替换参数 | **完整 SQL，复制即用** |
-| **能力上限** | 框架限制 | **SQL 的上限 = Spring 的上限** |
-| **扩展门槛** | 高（需啃源码） | **零（Spring AOP）** |
-| **性能** | 有损耗 | **≈ Spring JDBC** |
-| **迁移成本** | 重写 | **零（与 MyBatis 共存）** |
+- For any existing project using MyBatis, **you don’t need to change a single line of old code**. Just add the SimpleDAO dependency and start using it immediately.
+- MyBatis is bridged on top of Spring JDBC; SimpleDAO is built directly on Spring JDBC. They share the same data source and underlying Spring capabilities.
+- **Old and new business logic are fully decoupled and non‑interfering**:
+  - Existing business continues to use MyBatis
+  - New business uses SimpleDAO
+  - Gradually replace as you evolve the codebase
+- New projects can be built directly on SimpleDAO, completely moving away from MyBatis’ patch ecosystem.
 
 ---
 
-## 🤔 常见问题
-**Q: 要求 Java 21+，老项目用不了？**  
-**A: 故意写的。核心只是字符串拼接，降级到 JDK 8 分分钟——让 AI 帮你改，几分钟的事。**  
-（源码里那几处新语法，换个写法就行。你不会连 AI 都懒得用吧？）
+## 🏆 Core Value Summary
 
-**Q: 从 MyBatis 迁移到 SimpleDAO 成本高吗？**  
-**A: 零迁移成本。SimpleDAO 可与 MyBatis 无缝共生，你不需要改动任何老代码。**  
-- 引入 SimpleDAO 依赖后，原有 MyBatis 的 Mapper、XML、插件照常运行。  
-- 新业务直接用 SimpleDAO 开发，老代码碰都不碰。  
-- 没有“迁移”这个概念，只有“增量使用”。有精力就换，没精力永远共存。
-
-**Q: SimpleDAO 和 MyBatis Plus 有什么区别？**  
-A: MP 是“半 ORM”——单表用对象操作，多表退回 XML。SimpleDAO 是“SQL-First”——单表/多表都用 SQL 思维，API 完全统一。
-
-**Q: 需要学习新语法吗？**  
-A: 不需要。你会 SQL 和 Java，就会用 SimpleDAO。没有 XML、OGNL、JPQL 等额外语法。
-
-**Q: 适合微服务架构吗？**  
-A: 特别适合。轻量级（核心仅 3 个类）、无外部依赖、与 Spring Cloud 生态完美融合。
-
-**Q: 性能真的和 Spring JDBC 一样吗？**  
-A: 是的。启动时反射一次并缓存，运行时零反射；联表查询完全不解析实体；最终执行层就是 `JdbcTemplate`。**不接受反驳。**
-
-**Q: 跨语言支持？**  
-A: 已复刻到 Python、PHP、Go、C++、Node.js、Rust、C# 等 8 种主流后端语言。
+| Dimension | Traditional ORM | SimpleDAO |
+|-----------|----------------|-----------|
+| **Code volume** | Baseline | Reduce **60-80%** |
+| **Development time** | Baseline | Shorten **50%** |
+| **Learning cost** | 2-5 days | **20 minutes** |
+| **Debugging experience** | Placeholder SQL, manual parameter replacement | **Complete SQL, copy‑paste‑run** |
+| **Capability limit** | Framework constraint | **SQL’s limit = Spring’s limit** |
+| **Extension barrier** | High (need to study source) | **Zero (Spring AOP)** |
+| **Performance** | Overhead | **≈ Spring JDBC** |
+| **Migration cost** | Rewrite | **Zero (coexists with MyBatis)** |
 
 ---
 
-## 📚 深度阅读
+## 🤔 FAQ
 
-- [📄 SimpleDAO 快速开始（跑通完整案例）](https://gitee.com/gao_zhenzhong/simple-dao-demo/blob/master/readme.md)
+**Q: Requires Java 21+, what about legacy projects?**  
+**A: We chose Java 21 deliberately. The core is just string concatenation – downgrading to Java 8 takes only minutes. Let AI do it for you.**  
+(Just change a few newer syntax constructs – you can even ask an AI to do the conversion.)  
 
+**Q: Is migration from MyBatis to SimpleDAO expensive?**  
+**A: Zero migration cost. SimpleDAO coexists seamlessly with MyBatis – you don't need to change any old code.**  
+- After adding SimpleDAO dependency, your existing MyBatis mappers, XML, and plugins continue to run unchanged.  
+- New business can be written directly with SimpleDAO, leaving old code untouched.  
+- There is no “migration” – only “incremental usage”. You can replace at your own pace, or keep them together forever.
+
+**Q: What is the difference between SimpleDAO and MyBatis Plus?**  
+A: MyBatis Plus is a “semi‑ORM” – simple tables use object‑style operations, but complex queries fall back to XML. SimpleDAO is “SQL‑First” – both simple and complex use the SQL mindset, with a completely unified API.
+
+**Q: Do I need to learn new syntax?**  
+A: No. If you know SQL and Java, you already know SimpleDAO. No XML, OGNL, JPQL, or any other extra syntax.
+
+**Q: Is it suitable for microservices?**  
+A: Yes, exceptionally suitable. It is lightweight (only 3 core classes), has no external dependencies, and integrates perfectly with Spring Cloud.
+
+**Q: Is performance really the same as Spring JDBC?**  
+A: Yes. Reflection happens once at startup and is cached; zero reflection at runtime. Join queries never parse entities. The ultimate execution layer is `JdbcTemplate`. **No argument accepted.**
+
+**Q: Does it support other languages?**  
+A: Implementations exist for 8 major backend languages: Python, PHP, Go, C++, Node.js, Rust, C#, and more.
 
 ---
 
-## 🤝 加入我们
+## 📚 Further Reading
 
-SimpleDAO 正在改变开发者与数据库交互的方式。如果你：
-- ✅ 厌倦了复杂框架的折磨
-- ✅ 相信简单就是美
-- ✅ 重视开发效率和生活质量
-- ✅ 愿意分享和贡献
-
-欢迎：⭐ **Star** 项目 | 📚 **阅读** 贡献指南 | 🐛 **报告** Issue | 💬 **加入** 讨论群组
+- [📄 SimpleDAO Quick Start (run complete examples)](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme-en.md)
 
 ---
 
-## 📄 许可证
+## 🤝 Join Us
+
+SimpleDAO is changing the way developers interact with databases. If you:
+- ✅ Are tired of complex frameworks
+- ✅ Believe simplicity is powerful
+- ✅ Value development efficiency and quality of life
+- ✅ Are willing to share and contribute
+
+Welcome to: ⭐ **Star** the project | 📚 **Read** the contribution guide | 🐛 **Report** issues | 💬 **Join** the discussion group
+
+---
+
+## 📄 License
 
 Apache License 2.0
 
 ---
 
-## 🎯 最后的话
+## 🎯 Final Words
 
-SimpleDAO 不是为了成为又一个流行的框架，而是为了证明一件事：
+SimpleDAO is not meant to be just another popular framework. It exists to prove one thing:
 
-> **技术可以更简单，开发可以更愉快，程序员可以早下班。**
+> **Technology can be simpler, development can be more enjoyable, and programmers can go home early.**
 
-如果你也受够了复杂框架的折磨，欢迎尝试 SimpleDAO。
+If you are also fed up with the torture of complex frameworks, give SimpleDAO a try.
 
-我们为那些：
-- 想要高效完成工作的人
-- 想要早点回家陪家人的人
-- 相信简单比复杂更有力量的人
-
-而存在。
+We exist for those who:
+- want to get work done efficiently,
+- want to go home early to spend time with family,
+- believe that simplicity is stronger than complexity.
 
 ---
 
-**SimpleDAO: SQL-First，白盒透明，能力无上限。**  
-**把时间留给生活，而不是框架。**
+**SimpleDAO: SQL-First, White‑box Transparency, Capability Unlimited.**  
+**Leave time for life, not for the framework.**
 
 ---
 
-*SimpleDAO 已在生产环境稳定运行 3 年+，支撑日均百万级请求，服务十余家企业客户。*
+*SimpleDAO has been running stably in production for over 3 years, handling millions of requests daily, serving more than a dozen enterprise clients.*
