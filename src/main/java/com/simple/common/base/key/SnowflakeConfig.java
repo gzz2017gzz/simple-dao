@@ -7,13 +7,14 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author 高振中
  * @summary 【雪花主键生成器】
- * @date 2024-05-10 21:45:31
+ * @date 2026-05-13 21:45:31
  **/
 @Configuration
 public class SnowflakeConfig {
-    @Value("${spring.workerId}")
+ 
+    @Value("${simple-dao.worker-id:0}")
     private int workerId;/* 服务ID,集群部署时每个服务配成不同值 */
-    @Value("${spring.dataCenterId}")
+    @Value("${simple-dao.data-center-id:0}")
     private int dataCenterId;/* 数据中心ID */
 
     @PostConstruct
