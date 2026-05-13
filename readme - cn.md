@@ -167,6 +167,8 @@ SimpleDAO 不是对 Spring JDBC 的第三方封装，而是 **Spring JDBC 的原
 | `simple-dao.show-sql` | `true` | 是否打印带参 SQL 日志 |
 | `simple-dao.logic-delete.field` | `dr` | 逻辑删除字段名 |
 | `simple-dao.dialect` | 自动检测 | 数据库方言：`mysql`、`postgresql`、`sqlserver`、`oracle` |
+| `simple-dao.worker-id` | `0` | 雪花ID工作节点标识，集群环境为不同服务分配不同值 |
+| `simple-dao.data-center-id` | `0` | 雪花ID数据中心标识 |
 
 **方言三级降级策略**：显式配置 > 自动检测 > 兜底 MySQL。
 

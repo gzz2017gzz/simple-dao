@@ -163,9 +163,11 @@ SimpleDAO is not a third‑party wrapper around Spring JDBC; it is a **native ex
 
 | Property | Default | Description |
 | :--- | :--- | :--- |
-| `simple-dao.show-sql` | `true` | Whether to print SQL with parameters |
+| `simple-dao.show-sql` | `true` | Whether to print parameterized SQL logs |
 | `simple-dao.logic-delete.field` | `dr` | Logical delete field name |
-| `simple-dao.dialect` | auto‑detect | Database dialect: `mysql`, `postgresql`, `sqlserver`, `oracle` |
+| `simple-dao.dialect` | Auto-detect | Database dialect: `mysql`, `postgresql`, `sqlserver`, `oracle` |
+| `simple-dao.worker-id` | `0` | Snowflake worker ID, assign distinct values per service in cluster |
+| `simple-dao.data-center-id` | `0` | Snowflake data center ID |
 
 **Three‑level dialect fallback strategy**: explicit configuration > auto‑detection > MySQL fallback.
 
