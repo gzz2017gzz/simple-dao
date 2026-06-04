@@ -14,7 +14,7 @@
 
 ## 🚀 快速开始
 
-> 👉 立即实操：[SimpleDAO 完整案例](https://github.com/gzz2017gzz/simple-dao-demo/blob/master/readme.md)
+> 👉 立即实操：[SimpleDAO 完整案例](https://github.com/gzz2017gzz/simple-dao-demo)
 > 👉 API速查：[SimpleDAO API](api.md)
 
 ---
