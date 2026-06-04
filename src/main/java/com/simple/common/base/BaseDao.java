@@ -298,7 +298,7 @@ public class BaseDao<T> extends BaseSql {
     public <C extends BaseCondition> T findOne(boolean show, final C c) {
         List<T> list = list(show, c);
         if (list.size() > 1) {
-            throw new RuntimeException("rows than more 1");
+            throw new RuntimeException("查询结果多于1条，预期1条");
         }
         return list.stream().findFirst().orElse(null);
     }

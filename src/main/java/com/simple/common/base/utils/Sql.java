@@ -287,6 +287,6 @@ public final class Sql {
                 }
             }
         }
-        throw new IllegalArgumentException("SQL中未找到合法的主FROM关键字");
+        throw new IllegalArgumentException("无法自动生成count语句，请使用page0方法。SQL: " + sql);
     }
 }

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.StringUtils;
 
 import com.simple.common.base.utils.Sql;
+import com.simple.common.base.utils.SqlSecurityChecker;
 
 import static com.simple.common.base.key.Const.BLANK;
 import static com.simple.common.base.key.Const.EMPTY;
@@ -150,6 +151,7 @@ public abstract class BaseCondition {
      */
     protected final void add(final String sql, boolean logic) {
         if (logic && Objects.nonNull(sql) && StringUtils.hasText(sql)) {
+        	SqlSecurityChecker.check(sql);
             condition.append(BLANK).append(sql);
         }
     }
@@ -185,5 +187,10 @@ public abstract class BaseCondition {
      */
     public static Object[] mergeParams(BaseCondition first, BaseCondition... rest) {
         return Stream.concat(Stream.of(first), Arrays.stream(rest)).flatMap(cond -> cond.getParamList().stream()).toArray();
+    }
+    
+    public void setExtendCondition(String extendCondition) {
+        SqlSecurityChecker.check(extendCondition);  
+        this.extendCondition = extendCondition;
     }
 }
